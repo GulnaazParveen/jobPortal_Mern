@@ -1,0 +1,133 @@
+.post-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post-content{
+    
+    width: 600px;
+}
+.post-text{
+    font-size: 3.4rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    font-family: var(--font-family-2);
+  
+}
+.post-image{
+    padding-right: 3rem;
+    width: 650px;
+}
+.post-image img{
+   /* margin-right: 2rem; */
+    height: 500px;
+    width: 580px;
+}
+.ctn-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    text-transform: capitalize;
+    height: 50px;
+    width: 220px;
+    font-weight: 600;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    color: var(--color-white);
+    font-family: var(--font-family-2);
+    
+}
+.step-follow-post-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem 8rem 0 8rem;
+}
+.post-items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 4px 9px 0 rgba(240, 240, 240, 0.992), 0 6px 20px 0 rgba(240, 240, 240, 0.992);
+ margin: 0 1rem;
+ padding: 1rem 0;
+}
+.step-number{
+    text-align: center;
+    width: 25px;
+    font-weight: 600;
+    background-color: var(--light-purple);
+}
+.step-heading{
+    margin-bottom: 0.5rem;
+}
+.post-content-text{
+    color: var(--color-gray);
+    padding: 0rem 2rem 1rem 2rem;
+    margin-top: 0.5rem;
+   
+}
+.post-feedback-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem 0 0 0;
+}
+.feedback-content{
+    font-size: 2.5rem;
+    height: 330px;
+    background-color: var(--quartinary);
+    padding: 3rem 3rem 0 3rem;
+    font-family: var(--font-family-2);
+   font-weight: 400;
+}
+
+.post-feedback-image img{
+    height: 380px;
+    width: 700px;
+    
+}
+
+/* modal desgin */
+
+.form-conatiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--teriary-color);
+}
+
+.google-sign-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.google-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.google-item {
+    height: 40px;
+    margin: 2rem 0;
+
+}
+
+.form-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

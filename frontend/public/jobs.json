@@ -1,0 +1,154 @@
+[
+  {
+    
+    "name": "John Doe",
+    "email": "johndoe1@example.com",
+    "phone": "123-456-7890",
+    "companyName": "Tech Innovators",
+     "companyLogo": "https://media.licdn.com/dms/image/D4D0BAQFXIhzMPrN9eA/company-logo_100_100/0/1685721719591/openobserve_logo?e=1727913600&v=beta&t=6FBPWYPq6xMcS8Y9D3PkHspeg54bgQ2dCt2NNfKqDN0",
+        "employmentType": "Full-time",
+      "experienceLevel": "Internship",
+    "jobTitle": "Software Engineer",
+    "location": "London",
+  
+    "jobDescription": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. labor"
+  },
+  {
+    
+    "name": "Jane Smith",
+    "email": "janesmith2@example.com",
+    "phone": "234-567-8901",
+    "companyName": "Data Dynamics",
+     "companyLogo": "https://media.licdn.com/dms/image/D560BAQEh2o4zxPbNqw/company-logo_100_100/0/1718676479531?e=1727913600&v=beta&t=Dh7nqbsXLzC7qhILUY8J9MBWL4QttJssZjuftaYmvmI",
+       "employmentType": "Temporary",
+          "experienceLevel": "Internship",
+    "jobTitle": "DevOps Engineer",
+    "location": "Boston",
+  
+    "jobDescription": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. labor"
+  },
+  {
+    
+    "name": "Alice Johnson",
+    "email": "alicejohnson3@example.com",
+    "phone": "345-678-9012",
+    "companyName": "Creative Coders",
+    "companyLogo": "https://media.licdn.com/dms/image/D560BAQFNNCxEw1gamQ/company-logo_100_100/0/1709727763673/usehybr1d_logo?e=1727913600&v=beta&t=WHGZ4VSkbDklxeWYJfiGYuyRRywQbkcIYcYS5-9sRmc",
+     "employmentType": "Full-time",
+      "experienceLevel": "Junior",
+    "jobTitle": "Frontend Developer",
+    "location": "New York",
+  
+    "jobDescription": "Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  {
+    
+    "name": "Bob Brown",
+    "email": "bobbrown4@example.com",
+    "phone": "456-789-0123",
+    "companyName": "Tech Titans",
+    "companyLogo": "https://media.licdn.com/dms/image/C560BAQGyzzIlSiu6Pg/company-logo_100_100/0/1668065930880/troopr_logo?e=1727913600&v=beta&t=_gSOIAzF8Itd-m1aR3xSQagjGNW8Q31_XvKmumpwMI4",
+     "employmentType": "Part-time",
+      "experienceLevel": "Mid-level",
+    "jobTitle": "Backend Developer",
+    "location": "Mumbai",
+  
+    "jobDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  {
+    
+    "name": "Charlie Davis",
+    "email": "charliedavis5@example.com",
+    "phone": "567-890-1234",
+    "companyName": "Innovate Labs",
+    "companyLogo": "https://media.licdn.com/dms/image/C4D0BAQGLlonPp4wd-Q/company-logo_100_100/0/1630555832834/sperax_logo?e=1727913600&v=beta&t=ABDNtSJdonIgShtQaCKjr-QJKCNebWDh4hGCLQuK2jc",
+       "employmentType": "Full-time",
+         "experienceLevel": "Senior",
+    "jobTitle": "Full Stack Developer",
+    "location": "Patna",
+  
+    "jobDescription": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+  },
+  {
+    
+    "name": "Diana Evans",
+    "email": "dianaevans6@example.com",
+    "phone": "678-901-2345",
+    "companyName": "Cyber Solutions",
+       "companyLogo": "https://media.licdn.com/dms/image/C560BAQGuem4NU9Sl2w/company-logo_100_100/0/1630661980614/contractflo_logo?e=1727913600&v=beta&t=QfJCHxRNrM59m8DW56uqx-J55gZf6IT_mJTOTK8Z--M",
+         "employmentType": "Contract",
+          "experienceLevel": "Senior",
+    "jobTitle": "Security Analyst",
+    "location": "Chicago",
+  
+    "jobDescription": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    
+    "name": "Evan Fox",
+    "email": "evanfox7@example.com",
+    "phone": "789-012-3456",
+    "companyName": "Quantum Tech",
+     "companyLogo": "https://media.licdn.com/dms/image/C4D0BAQH4yzMPM5YcHA/company-logo_100_100/0/1630564140097/gfk_logo?e=1727913600&v=beta&t=qMgxKB1Yj2df9PTrjDj1ZTChq4avGpROCmF41EJ2EhA",
+       "employmentType": "Full-time",
+        "experienceLevel": "Mid-level",
+    "jobTitle": "Data Scientist",
+    "location": "Seattle",
+  
+    "jobDescription": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+  },
+  {
+    
+    "name": "Fiona Green",
+    "email": "fionagreen8@example.com",
+    "phone": "890-123-4567",
+    "companyName": "AI Ventures",
+     "companyLogo": "https://media.licdn.com/dms/image/D560BAQFCWWlw4idY_w/company-logo_100_100/0/1710819423926/csmtechnologies_logo?e=1727913600&v=beta&t=7S9CDM0B54oH09Ifir2bwLwwrEo_X2LeS05W0STSBQY",
+       "employmentType": "Temporary",
+          "experienceLevel": "Junior",
+    "jobTitle": "Machine Learning Engineer",
+    "location": "Jaipur",
+  
+    "jobDescription": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?"
+  },
+  {
+    
+    "name": "George Harris",
+    "email": "georgeharris9@example.com",
+    "phone": "901-234-5678",
+    "companyName": "Smart Solutions",
+      "companyLogo": "https://media.licdn.com/dms/image/D560BAQEQyG64MCQA0w/company-logo_100_100/0/1706278760975/sogofy_biz_tech_private_limited_logo?e=1727913600&v=beta&t=bLXvsUPWqG1yY2oLBEQOAwxrlSUzpvIfYwNOQxSlecw",
+       "employmentType": "Part-time",
+          "experienceLevel": "Mid-level",
+    "jobTitle": "Project Manager",
+    "location": "Bangalore",
+  
+    "jobDescription": "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+  },
+  {
+    "name": "Hannah James",
+    "email": "hannahjames10@example.com",
+    "phone": "012-345-6789",
+    "companyName": "Future Enterprises",
+      "companyLogo": "https://media.licdn.com/dms/image/D560BAQEkJN74K_NyiA/company-logo_100_100/0/1716477694987/inorg_logo?e=1727913600&v=beta&t=M9ARz5c3WhzCxdAmCnFEYqvuSr4K8O6ZxxSL1iGCuu8",
+       "employmentType": "Full-time",
+          "experienceLevel": "Junior",
+    "jobTitle": "UI/UX Designer",
+    "location": "Dubai",
+  
+    "jobDescription": "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus."
+  },
+  {
+    "name": "Hannah James",
+    "email": "hannahjames10@example.com",
+    "phone": "012-345-6789",
+    "companyName": "Future Enterprises",
+      "companyLogo": "https://media.licdn.com/dms/image/D560BAQFCWWlw4idY_w/company-logo_100_100/0/1710819423926/csmtechnologies_logo?e=1727913600&v=beta&t=7S9CDM0B54oH09Ifir2bwLwwrEo_X2LeS05W0STSBQY",
+       "employmentType": "part time",
+          "experienceLevel": "Senior",
+    "jobTitle": "UI/UX Designer",
+    "location": "Mumbai",
+  
+    "jobDescription": "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus."
+  }
+]

@@ -1,0 +1,12 @@
+.heros-container {
+    background-image: url('../images/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.banner-class{
+    background-image: url('../images//banner.png');
+    background-repeat: no-repeat;
+        background-size: cover;
+        height: 60vh;
+}

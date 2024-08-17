@@ -1,0 +1,168 @@
+.container {
+    position: relative;
+
+}
+
+.navbar {
+    display: flex;
+    padding: 2rem 4rem 0 0rem;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    background-color: transparent;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 29, rgb(41, 41, 152), 0.6);
+}
+
+.navbar.scrolled {
+  background-color: var(--transparent--bg-color-scrolled);
+}
+
+.nav-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+
+.jobportal-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-white);
+}
+
+nav ul li {
+    list-style-type: none;
+    margin: 0 1rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+
+}
+
+.link {
+    text-decoration: none;
+    color: var(--color-white);
+    margin: 0 0;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    width: 22%;
+    height: 55px;
+    margin: 0 1rem 0 0;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+}
+
+.search .search-icon {
+    width: 50px;
+    /* Adjust as needed */
+    height: 60px;
+    /* Adjust as needed */
+    margin-left: 0.4rem;
+    color: var(--color-white);
+    margin-top: 0.3rem;
+}
+
+.main-title {
+    margin: 0 0;
+    font-size: 2.4rem;
+    color: var(--color-white);
+    text-transform: capitalize;
+
+}
+
+.title-subtext {
+    margin: 0 0;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    color: var(--color-white);
+
+}
+
+.nav-right {
+    display: flex;
+
+}
+
+.account-btn {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0.8rem 1rem 0 0;
+}
+
+.post-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    text-transform: capitalize;
+    height: 50px;
+    width: 150px;
+    font-weight: 600;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: var(--font-family-2);
+
+}
+
+#post-btn {
+    width: 120px !important;
+    margin-right: 1rem;
+}
+
+/* modal design */
+.form-conatiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--teriary-color);
+}
+
+.google-sign-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.google-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.google-item {
+    height: 40px;
+    margin: 2rem 0;
+
+}
+
+.form-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

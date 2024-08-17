@@ -1,0 +1,160 @@
+
+.category-container {
+    margin: 0 5rem 0 7rem;
+}
+
+.findjob-container {
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 0 0 0;
+}
+
+.search-filter-btn {
+    display: flex;
+
+}
+
+.search-input {
+    width: 260px;
+    color: var(--color-gray);
+    height: 50px;
+    border: 1px solid var(--color-gray);
+    margin: 0 2rem 0 0;
+    border-radius: var(--borderd-radius);
+}
+
+.dropdownmenu {
+    width: 260px;
+    background-color: var(--color-white);
+    color: var(--color-gray);
+    height: 50px;
+    margin: 0 2rem 0 0;
+    border-radius: var(--borderd-radius);
+
+}
+
+.popular-search-container {
+    display: flex;
+
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    text-transform: capitalize;
+    height: 50px;
+    width: 260px;
+    font-weight: 600;
+    border-radius: var(--borderd-radius);
+    font-size: 1rem;
+    color: var(--color-white);
+    font-family: var(--font-family);
+
+}
+.popular-search-container{
+  margin: 2rem 0 0 0;
+}
+.popular-search{
+    font-family: var(--font-family);
+    font-weight: 500;
+}
+.cards{
+    margin-left: 1.5rem;
+}
+.popular-category-item{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat((2,auto));
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* main categories */
+
+.categories-main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-image: url("../images/background-3.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 400px;
+        margin: 4rem 0 0 0;
+}
+.popular-category-heading{
+    text-transform: capitalize;
+}
+.category-title{
+color: var(--color-white);
+    font-weight: 500;
+    font-family: var(--font-family-2);
+    text-align: center;
+    font-size: 2.5rem;
+    text-transform: capitalize;
+    margin-bottom: 10rem;
+}
+.categories-items{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 16rem;
+        left: 9rem;
+}
+.category-item{
+    background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--borderd-radius);
+    /* box-shadow: 0 4px 8px 0 var(--color-gray),0 6px 20px 0 var(--color-gray); */
+    width: 300px;
+    height: 300px;
+    margin: 0 1.3rem;
+    box-shadow: 0 4px 8px 0 rgba(240, 240, 240, 0.992), 0 6px 20px 0 rgba(240, 240, 240, 0.992);
+}
+.category-2{
+    margin-top: 3rem;
+}
+.oppurtunity-cons{
+    height: 50px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--light-purple);
+        border-radius: 50%;
+        margin-top: 2rem;
+        
+}
+.opportunity-icon{
+    font-size: 2.3rem !important;
+        color: var(--background);
+}
+.opportunity-title{
+    margin: 2rem 0 0 0;
+        text-transform: capitalize;
+}
+.opportunity-content{
+    text-align: center;
+        font-size: 0.9rem;
+        padding-bottom: 1rem;
+        color: var(--color-gray);
+}
+.oppurtunity-content-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

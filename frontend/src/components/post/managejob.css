@@ -1,0 +1,167 @@
+.manageJob-Container {
+    height: 500px;
+    border-radius: var(--borderd-radius);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    position: relative;
+    margin: 0 1rem;
+}   
+.managejob-subcont{
+   margin-top: 1rem;
+    width: 90%;
+}
+.managejob-Heading {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: var(--quartinary);
+    font-weight: 600;
+    text-transform: capitalize;
+    height: 60px;
+ background-color: var(--light-purple);
+ width: 100%;
+}
+.headingitems{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 260px;
+}
+.headingitems >p{
+    color: var(--quartinary);
+        font-weight: 600;
+        text-transform: capitalize;
+        font-size: 1.1rem;
+     font-family:var(--font-family) ;
+}
+.applicant{
+    width: 150px;
+}
+.heading-item{
+    width: 180px;
+}
+.mangajob-items{
+    width: 100%;
+    
+}
+/* jobitem list  */
+.jobPostItems{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  
+  
+  padding: 1.8rem 0px;
+}
+.jobPostedItem{
+    width: 200px;
+   
+}
+.company-name{
+    width: 179px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: capitalize;
+}
+.company-Details{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.done{
+   color: var(--secondary-color);
+}
+.locicon{
+height: 18px;
+    width: 18px;
+}
+.posted-company-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.company-location{
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--color-gray);
+        margin-top: 0.2rem;
+}
+.company-location> span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.applicants{
+display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--quartinary);
+    font-size: 1.2rem;
+        text-transform: capitalize;
+        font-weight: 600;
+}
+.postedDateNExpire{
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      
+}
+.Date{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+        text-transform: capitalize;
+        font-weight: 700;
+       width: 250px;
+      
+}
+
+.post-date{
+    font-weight:600 ;
+    color: var(--color-gray);
+    font-size: 1.1rem;
+}
+.expiry-date{
+    font-weight: 600;
+    color: rgb(152, 5, 5);
+    font-size: 1.1rem;
+}
+.postStatus{
+display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    font-weight: 700;
+        color: var(--secondary-color);
+}
+.EmployerActions-Items{
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 102px;
+}
+.action-icon{
+    height: 40px;
+    width: 70px;
+    background-color:var(--light-purple);
+    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
+}
+.actionIcon{
+    color: var(--quartinary);
+margin: 6px 0.4rem;
+height: 30px;
+    width: 30px;
+}

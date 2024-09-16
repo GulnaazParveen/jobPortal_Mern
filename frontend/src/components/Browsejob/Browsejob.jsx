@@ -19,10 +19,14 @@ const Browsejob = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/getjob")
+      .get("http://localhost:8000/api/v1/users/getjob", {
+        withCredentials: true,
+      })
       .then((res) => {
-        console.log("Fetched jobs:", res.data); // Debug log
-        setJobs(res.data);
+                 
+        const jobsData = res.data.data;
+        setJobs(jobsData); // Set the array of jobs
+        
         setLoading(false);
       })
       .catch((error) => {

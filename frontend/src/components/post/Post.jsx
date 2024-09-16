@@ -9,6 +9,7 @@ import { auth, provider } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { setEmployer, clearEmployer } from "../../features/EmployerSlice";
 import {useNavigate} from "react-router-dom"
+import axios from "axios";
 const Post = () => {
   const dispatch = useDispatch();
   const navigate= useNavigate()
@@ -23,11 +24,10 @@ const Post = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const employerSignData = result.user;
-
+      
       if (!employerSignData) {
         throw new Error("No user data found");
       }
-
       dispatch(
         setEmployer({
           uid: employerSignData.uid,
@@ -37,7 +37,24 @@ const Post = () => {
         })
       );
       console.log("Sign-in successful", employerSignData); // Debug: Log successful sign-in data
+     const config = {
+       headers: {
+         "Content-Type": "application/json",
+       },
+     };
+     const body = {
+       employerId: employerSignData.uid,
+       EmployerName: employerSignData.displayName,
+       email: employerSignData.email,
+       EmployerPhotoUrl: employerSignData.photoURL,
+     };
 
+     const employerData = await axios.post(
+       "http://localhost:8000/api/employerLogin",
+       body,
+       config
+     );
+     console.log(employerData);
       // Navigate to post job form after successful sign-in
       navigate("/postjobform");
     } catch (error) {
@@ -91,7 +108,7 @@ const Post = () => {
               </IconButton>
               <div className="google-sign-container">
                 <div className="google-item">
-                  <div className="google-image">
+                  <div className="google-image" onClick={handleEmployerSignIn}>
                     <img
                       src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/image8-2.jpg?width=595&height=400&name=image8-2.jpg"
                       alt="Google sign-in"

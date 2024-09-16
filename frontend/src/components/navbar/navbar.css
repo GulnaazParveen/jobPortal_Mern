@@ -53,6 +53,7 @@ nav ul li {
     text-decoration: none;
     color: var(--color-white);
     margin: 0 0;
+    cursor: pointer;
 }
 
 .search {

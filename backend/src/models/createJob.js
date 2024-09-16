@@ -1,14 +1,18 @@
 import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema({
+  employer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "employer",
+    required: true,
+  },
   name: {
     type: String,
     required: true,
   },
-  email: {
+  websiteurl: {
     type: String,
     required: true,
-    unique: true,
   },
   phone: {
     type: String,
@@ -24,13 +28,13 @@ const jobSchema = new mongoose.Schema({
   },
   employmentType: {
     type: String,
-    enum: ['Full-time', 'Part-time', 'Temporary', 'Contract'],
-    default: 'Full-time',
+    enum: ["Full-time", "Part-time", "Temporary", "Contract"],
+    default: "Full-time",
   },
   experienceLevel: {
     type: String,
-    enum: ['Entry Level', 'Mid Level', 'Senior Level', 'Internship'],
-    default: 'Entry Level',
+    enum: ["Entry Level", "Mid Level", "Senior Level", "Internship"],
+    default: "Entry Level",
   },
   jobTitle: {
     type: String,
@@ -46,6 +50,6 @@ const jobSchema = new mongoose.Schema({
   },
 });
 
-const job = mongoose.model('job', jobSchema);
+const job = mongoose.model("job", jobSchema);
 
-export default job;
+export  default job;

@@ -12,9 +12,9 @@ import ClientFeedback from './ClientFeedback';
 const Layout = () => {
   const location = useLocation();
   // const isBrowseJob = location.pathname === '/browseJob';
- const dynamicContentBasedOnRoute=['/browseJob','/post','/postjobform', '/pages', '/blogs', '/contact']
-  const containerRoutes = ['/browseJob','/post', '/pages','/postjobform', '/blogs', '/contact'];
-  const dynamicTextBasedOnRoutes = ['/browseJob', '/post','/postjobform', '/pages', '/blogs', '/contact'];
+ const dynamicContentBasedOnRoute=['/browseJob','/post','/postjobform','/managejob/:id','/postjobform/:id', '/pages', '/blogs', '/contact']
+  const containerRoutes = ['/browseJob','/post', '/pages','/postjobform','/managejob/:id','/postjobform/:id', '/blogs', '/contact'];
+  const dynamicTextBasedOnRoutes = ['/browseJob', '/post','/postjobform','/managejob/:id', '/postjobform/:id','/pages', '/blogs', '/contact'];
 
   // Check if the current route matches any of the containerRoutes
   const isContainerRoute = containerRoutes.includes(location.pathname);

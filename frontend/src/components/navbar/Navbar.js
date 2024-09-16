@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import "./navbar.css";
 import { Divider, Modal, Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -13,8 +13,11 @@ import { setUser, clearUser } from "../../features/Features";
 import { useSelector } from "react-redux";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { setEmployer,clearEmployer } from "../../features/EmployerSlice";
+import { Link } from "react-router-dom";
+import { clearEmployer } from "../../features/EmployerSlice";
+import axios from "axios";
 const Navbar = () => {
+
   const [ismodelopen, setModelOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const user = useSelector((state) => state.auth.user);
@@ -76,6 +79,23 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+   const [getIndividualJobs, setJobsBasedEmployerId] = useState([]);
+   
+   const { employerId } = useParams();
+  //  console.log(id);
+   
+  useEffect(() => {
+    if (employerId) {
+      axios
+        .get(`http://localhost:8000/api/employer/${employerId}`)
+        .then((response) => {
+          console.log(response.data); // Log the response to check the data structure
+          setJobsBasedEmployerId(response.data);
+        })
+        .catch((error) => console.error("Error fetching job data:", error));
+    }
+  }, [employerId]);
 
   return (
     <div className="container">
@@ -188,7 +208,7 @@ const Navbar = () => {
                   setModelOpen(true);
                 }}
               >
-                Login
+                Signup
               </p>
             )}
           </div>
@@ -282,21 +302,18 @@ const Navbar = () => {
               </div>
             </Box>
           </Modal>
-          {employer ? (
+          {getIndividualJobs && getIndividualJobs.EmployerPhotoUrl ? (
             <>
               <img
-                src={employer.photoURL}
-                alt={employer.displayName}
+                src={getIndividualJobs.EmployerPhotoUrl}
+                alt={getIndividualJobs.EmployerName}
                 id="employer-image"
-                aria-controls={open ? "basic-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
                 style={{
                   borderRadius: "50%",
                   height: "55px",
                   width: "55px",
                   cursor: "pointer",
-                marginRight:"1rem"
+                  marginRight: "1rem",
                 }}
                 onClick={handleClick}
               />
@@ -310,8 +327,14 @@ const Navbar = () => {
                 }}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={hanleLogout}>Logout</MenuItem>
+                <MenuItem
+                  onClick={handleClose}
+                  component={Link}
+                  to={`/managejob/${getIndividualJobs.employerId}`}
+                >
+                  Manage Job
+                </MenuItem>
+                <MenuItem onClick={hanleEmployerLogout}>Logout</MenuItem>
               </Menu>
             </>
           ) : (

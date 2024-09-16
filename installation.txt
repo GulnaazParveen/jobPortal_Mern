@@ -1,0 +1,8 @@
+npm install @tiptap/extension-document @tiptap/extension-paragraph @tiptap/extension-text @tiptap/react
+npm install @tiptap/extension-underline
+npm i html-react-parser
+npm i dotenv
+npm i jsonwebtoken
+npm i bcrypt
+npm i multer
+npm i cloudinary

@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import "./navbar.css";
 import { Divider, Modal, Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -14,15 +14,104 @@ import { useSelector } from "react-redux";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
-import { clearEmployer } from "../../features/EmployerSlice";
+// import { clearEmployer } from "../../features/EmployerSlice";
 import axios from "axios";
-const Navbar = () => {
+import Login from "./authentication/LoginUser";
+import UserRegister from "./authentication/UserRegister";
+import { loginUser,logoutUser} from "../../features/authSlice";
+import { logoutEmployer } from "../../features/EmployerSlice";
 
+const Navbar = () => {
   const [ismodelopen, setModelOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const user = useSelector((state) => state.auth.user);
-  const employer=useSelector((state)=> state.employer.employer)
+  // const user = useSelector((state) => state.auth.user);
+  const employer = useSelector((state) => state.employer.employer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, loading, error} = useSelector((state) => state.auth); // Access auth state
+ 
+  
+
+
+  // register user logic
+  const [userData, setUserData] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    avatar: null,
+  });
+  const [IsRegisterUser, setRegisterUser] = useState(false);
+  const [Error, setError] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, type, value, files } = e.target;
+    setUserData((prevState) => ({
+      ...prevState,
+      [name]: type === "file" ? files[0] : value,
+    }));
+  };
+
+  const handleUserRegister = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("userName", userData.userName);
+    formData.append("email", userData.email);
+    formData.append("password", userData.password);
+    if (userData.avatar) {
+      formData.append("avatar", userData.avatar);
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/users/registerUser",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("User registered successfully", response.data);
+      setRegisterUser(true);
+    } catch (error) {
+      console.error("Error registering user", error);
+      setError("Error registering user");
+    }
+  };
+
+  // login user logic
+  const [isLoginUser, setLoginUser] = useState(false);
+  // const [user, setDataAfterLogin] = useState(null);
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChangeLogin = (e) => {
+    setLoginData({
+      ...loginData, // Spread the previous state to keep other values
+      [e.target.name]: e.target.value, // Update the specific field
+    });
+  };
+  // Handle login user logic
+  const handleLoginUser = (e) => {
+    e.preventDefault();
+    dispatch(loginUser(loginData)); // Dispatch login action
+    loading(true)
+  };
+  // Monitor `user` state change after login
+  useEffect(() => {
+    if (user) {
+      console.log("Login successful, user data:", user); // Confirm user data
+      navigate("/");
+    }
+  }, [user, navigate]); // useEffect runs when `user` or `navigate` changes
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
 
   // Dropdown menu
   const [anchorEl, setAnchorEl] = useState(null);
@@ -34,18 +123,11 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  // handle logout user
-    const hanleLogout=()=>{
-      dispatch(clearUser(user.id))
-    }
+  
 
+  
 
-    // handle logout employer
-   const hanleEmployerLogout=()=>{
-    dispatch(clearEmployer())
-   }
-
-// handle user signIn
+  // handle user signIn
   const handleUserSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -80,11 +162,11 @@ const Navbar = () => {
     };
   }, []);
 
-   const [getIndividualJobs, setJobsBasedEmployerId] = useState([]);
-   
-   const { employerId } = useParams();
+  const [getIndividualJobs, setJobsBasedEmployerId] = useState([]);
+
+  const { employerId } = useParams();
   //  console.log(id);
-   
+
   useEffect(() => {
     if (employerId) {
       axios
@@ -96,6 +178,20 @@ const Navbar = () => {
         .catch((error) => console.error("Error fetching job data:", error));
     }
   }, [employerId]);
+
+const handleLogoutEmployer=()=>{
+  dispatch(logoutEmployer())
+}
+  // custom fetching data from form
+    const employerdata = useSelector((state) => state.employer.employer);
+
+    useEffect(() => {
+       console.log("Employer data:", employerdata);
+      if (employerdata) {
+        navigate("/");
+      }
+    }, [employerdata,navigate]);
+
 
   return (
     <div className="container">
@@ -173,8 +269,8 @@ const Navbar = () => {
             {user ? (
               <>
                 <img
-                  src={user.photoURL}
-                  alt={user.displayName}
+                  src={user.avatar}
+                  alt={user.userName}
                   id="unique-image"
                   aria-controls={open ? "basic-menu" : undefined}
                   aria-haspopup="true"
@@ -198,7 +294,7 @@ const Navbar = () => {
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={hanleEmployerLogout}>Logout</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
               </>
             ) : (
@@ -241,72 +337,30 @@ const Navbar = () => {
               >
                 <CloseIcon />
               </IconButton>
-              <div className="google-sign-container">
-                <div className="google-item">
-                  <div className="google-image">
-                    <img
-                      src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/image8-2.jpg?width=595&height=400&name=image8-2.jpg"
-                      alt="Google sign-in"
-                      style={{ width: "100%", height: "50px" }}
-                    />
-                  </div>
-                  <p
-                    style={{
-                      width: "250px",
-                      background: "#f5f5f5",
-                      height: "50px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    onClick={handleUserSignIn}
-                  >
-                    Sign in with Google
-                  </p>
-                </div>
-                <Divider />
-                <div className="form-container">
-                  <form action="" className="form">
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      style={{
-                        width: "300px",
-                        margin: "10px 0",
-                        height: "35px",
-                      }}
-                    />
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      style={{
-                        width: "100%",
-                        margin: "10px 0",
-                        height: "35px",
-                      }}
-                    />
-                  </form>
-                </div>
-                <div className="form-bottom">
-                  <p
-                    style={{ textTransform: "capitalize", fontSize: "1.1rem" }}
-                  >
-                    new here ?
-                  </p>
-                  <a href="" style={{ textDecoration: "none" }}>
-                    Signup
-                  </a>
-                </div>
-              </div>
+              {IsRegisterUser ? (
+                <Login
+                  handleChangeLogin={handleChangeLogin}
+                  handleLoginUser={handleLoginUser}
+                  loginData={loginData}
+                  isLoginUser={isLoginUser}
+                />
+              ) : (
+                <UserRegister
+                  handleUserRegister={handleUserRegister}
+                  userData={userData}
+                  handleChange={handleChange}
+                  IsRegisterUser={IsRegisterUser}
+                  setRegisterUser={setRegisterUser}
+                  error={Error}
+                />
+              )}
             </Box>
           </Modal>
-          {getIndividualJobs && getIndividualJobs.EmployerPhotoUrl ? (
+          {employerdata ? (
             <>
               <img
                 src={getIndividualJobs.EmployerPhotoUrl}
-                alt={getIndividualJobs.EmployerName}
+                alt={employerdata.name}
                 id="employer-image"
                 style={{
                   borderRadius: "50%",
@@ -330,17 +384,24 @@ const Navbar = () => {
                 <MenuItem
                   onClick={handleClose}
                   component={Link}
-                  to={`/managejob/${getIndividualJobs.employerId}`}
+                  to="/postjobform"
+                >
+                  Post job
+                </MenuItem>
+                <MenuItem
+                  onClick={handleClose}
+                  component={Link}
+                  to={`/managejob/${employerdata._id}`}
                 >
                   Manage Job
                 </MenuItem>
-                <MenuItem onClick={hanleEmployerLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleLogoutEmployer}>Logout</MenuItem>
               </Menu>
             </>
           ) : (
             <div className="post-btn" id="post-btn">
               <NavLink to="/post" className="link">
-                Post a Job
+                Employer
               </NavLink>
             </div>
           )}

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +16,8 @@
     "express": "^5.0.0-alpha.8",
     "jsonwebtoken": "^9.0.2",
     "mongoose-aggregate-paginate-v2": "^1.1.2",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "react-toastify": "^10.0.5"
   },
   "type": "module",
   "devDependencies": {

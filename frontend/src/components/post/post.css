@@ -131,3 +131,22 @@
     justify-content: center;
     align-items: center;
 }
+.formModal{
+  border-top: 2px solid var(--background);
+    border-right: 1px solid var(--color-gray);
+    border-left: 1px solid var(--color-gray);
+    border-bottom: 1px solid var(--color-gray);
+    height: 500px;
+}
+.tab-header{
+    padding: 1rem;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    background-color: var(--color-white); 
+    height: 30px;
+  
+}
+.active-styling{
+background:var(--light-purple);
+}

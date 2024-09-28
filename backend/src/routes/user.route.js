@@ -4,13 +4,13 @@ import { upload } from "../middlewares/multer.middleware.js";
 
 // importing route
 import { createJob, findAllJobs ,findJobsByEmployerId} from "../controllers/job.controller.js";
-import { registerUser } from "../controllers/user.controller.js";
+import { loginUser, registerUser } from "../controllers/user.controller.js";
 
 //declaratoin exact route
 router.route("/postjob").post(createJob);
 router.route("/getjob").get(findAllJobs);
 router.route("/employer/:employerId/jobs").get(findJobsByEmployerId);
-router.route("registerUser").post(
+router.route("/registerUser").post(
   upload.fields([
     {
       name: "avatar",
@@ -23,4 +23,5 @@ router.route("registerUser").post(
   ]),
   registerUser
 );
+router.route("/login").post(loginUser);
 export default router;

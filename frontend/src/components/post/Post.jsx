@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./post.css";
 import postjob from "../images/jobpost.jpg";
 import smilingHrGreeting from "../images/smilingHrGreeting.jpg";
@@ -7,60 +7,120 @@ import CloseIcon from "@mui/icons-material/Close";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { setEmployer, clearEmployer } from "../../features/EmployerSlice";
 import {useNavigate} from "react-router-dom"
 import axios from "axios";
+import EmployerRegister from "../employer/EmployerRegister";
+import { LoginEmployer } from "../../features/EmployerSlice";
+import EmployerLogin from "../employer/EmployerLogin";
+
 const Post = () => {
   const dispatch = useDispatch();
   const navigate= useNavigate()
   const [ismodelopen, setModelOpen] = useState(false);
 
   //  after sign in our result is store in redux store now  access the data from redux store
-   const employerAccountDetails = useSelector(
-     (state) => state.employer.employer
-   );
+  //  const employerAccountDetails = useSelector(
+  //    (state) => state.employer.employer
+  //  );
 
-  const handleEmployerSignIn = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const employerSignData = result.user;
+  // const handleEmployerSignIn = async () => {
+  //   try {
+  //     const result = await signInWithPopup(auth, provider);
+  //     const employerSignData = result.user;
       
-      if (!employerSignData) {
-        throw new Error("No user data found");
-      }
-      dispatch(
-        setEmployer({
-          uid: employerSignData.uid,
-          displayName: employerSignData.displayName,
-          email: employerSignData.email,
-          photoURL: employerSignData.photoURL,
-        })
-      );
-      console.log("Sign-in successful", employerSignData); // Debug: Log successful sign-in data
-     const config = {
-       headers: {
-         "Content-Type": "application/json",
-       },
-     };
-     const body = {
-       employerId: employerSignData.uid,
-       EmployerName: employerSignData.displayName,
-       email: employerSignData.email,
-       EmployerPhotoUrl: employerSignData.photoURL,
-     };
+  //     if (!employerSignData) {
+  //       throw new Error("No user data found");
+  //     }
+  //     dispatch(
+  //       setEmployer({
+  //         uid: employerSignData.uid,
+  //         displayName: employerSignData.displayName,
+  //         email: employerSignData.email,
+  //         photoURL: employerSignData.photoURL,
+  //       })
+  //     );
+  //     console.log("Sign-in successful", employerSignData); // Debug: Log successful sign-in data
+  //    const config = {
+  //      headers: {
+  //        "Content-Type": "application/json",
+  //      },
+  //    };
+  //    const body = {
+  //      employerId: employerSignData.uid,
+  //      EmployerName: employerSignData.displayName,
+  //      email: employerSignData.email,
+  //      EmployerPhotoUrl: employerSignData.photoURL,
+  //    };
 
-     const employerData = await axios.post(
-       "http://localhost:8000/api/employerLogin",
-       body,
-       config
-     );
-     console.log(employerData);
-      // Navigate to post job form after successful sign-in
-      navigate("/postjobform");
-    } catch (error) {
-      console.error("Error signing in: ", error);
-      dispatch(clearEmployer());
-    }
+  //    const employerData = await axios.post(
+  //      "http://localhost:8000/api/employerLogin",
+  //      body,
+  //      config
+  //    );
+  //    console.log(employerData);
+  //     // Navigate to post job form after successful sign-in
+  //     navigate("/postjobform");
+  //   } catch (error) {
+  //     console.error("Error signing in: ", error);
+  //     dispatch(clearEmployer());
+  //   }
+  // };
+  
+   const [isSignIn, setIsSignIn] = useState(true);
+
+   const handleSignUpClick = () => {
+     setIsSignIn(false);
+   };
+   // Handlers for switching tabs
+   const handleSignInClick = () => {
+     setIsSignIn(true);
+   };
+
+ const [isRegister,setRegisterEmployer]=useState(false)
+  const [employerRegisterData,setEmployerRegister]=useState({
+    name:"",
+    email:"",
+    password:"",
+    mobileNumber:"",
+    Address:"",                                                                                            
+  })
+
+  const handleRegisterEmployer=(e)=>{
+    e.preventDefault()
+    axios.post(
+        "http://localhost:8000/api/v1/employers/registerEmployer",
+        employerRegisterData
+      )
+      .then((response) => console.log("register successfully", response.data))
+      .catch((error) => console.log("error in register",error));
+      setRegisterEmployer(true);
+  }
+
+  const handleChange = (e) => {
+    setEmployerRegister({
+      ...employerRegisterData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // login employer 
+
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChangeLogin = (e) => {
+    setLoginData({
+      ...loginData, 
+      [e.target.name]: e.target.value, 
+    });
+  };
+  // Handle login user logic
+  const handleLoginEmployer = (e) => {
+    e.preventDefault();
+    dispatch(LoginEmployer(loginData));
+
   };
 
 
@@ -92,8 +152,8 @@ const Post = () => {
             <Box
               className="form-container"
               sx={{
-                width: 600,
-                height: 400,
+                width: 500,
+                height: 500,
                 bgcolor: "#ffffff",
                 p: 3,
                 position: "relative",
@@ -106,65 +166,52 @@ const Post = () => {
               >
                 <CloseIcon />
               </IconButton>
-              <div className="google-sign-container">
-                <div className="google-item">
-                  <div className="google-image" onClick={handleEmployerSignIn}>
-                    <img
-                      src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/image8-2.jpg?width=595&height=400&name=image8-2.jpg"
-                      alt="Google sign-in"
-                      style={{ width: "100%", height: "50px" }}
-                    />
-                  </div>
-                  <p
+              <div className="formModal">
+                <div className="tab-header">
+                  <div
+                    className={isSignIn ? "active active-styling" : ""}
+                    onClick={handleSignInClick}
                     style={{
-                      fontSize: "1.5rem",
-                      width: "250px",
-                      background: "#f5f5f5",
-                      height: "50px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      cursor: "pointer",
+                      fontSize: "1.3rem",
+                      fontWeight: "700",
+                      textAlign: "center",
+                      width: "300px",
+                      height: "40px",
                     }}
-                    onClick={handleEmployerSignIn}
                   >
-                    Sign in with Google
-                  </p>
-                </div>
-                <Divider />
-                <div className="form-container">
-                  <form action="" className="form">
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      style={{
-                        width: "300px",
-                        margin: "10px 0",
-                        height: "35px",
-                      }}
-                    />
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      style={{
-                        width: "100%",
-                        margin: "10px 0",
-                        height: "35px",
-                      }}
-                    />
-                  </form>
-                </div>
-                <div className="form-bottom">
-                  <p
-                    style={{ textTransform: "capitalize", fontSize: "1.1rem" }}
+                    Sign In
+                  </div>
+                  <div
+                    className={!isSignIn ? "active active-styling" : ""}
+                    onClick={handleSignUpClick}
+                    style={{
+                      fontSize: "1.3rem",
+                      fontWeight: "700",
+                      textAlign: "center",
+                      width: "300px",
+                      height: "40px",
+                    }}
                   >
-                    new here ?
-                  </p>
-                  <a href="" style={{ textDecoration: "none" }}>
-                    Signup
-                  </a>
+                    Sign Up
+                  </div>
+                </div>
+
+                <div className="form-content">
+                  {isSignIn ? (
+                    <EmployerLogin
+                      handleLoginEmployer={handleLoginEmployer}
+                      handleChangeLogin={handleChangeLogin}
+                      loginData={loginData}
+                    />
+                  ) : (
+                    <EmployerRegister
+                      handleRegisterEmployer={handleRegisterEmployer}
+                      handleChange={handleChange}
+                      employerRegisterData={employerRegisterData}
+                      setRegisterEmployer={setEmployerRegister}
+                      isRegister={isRegister}
+                    />
+                  )}
                 </div>
               </div>
             </Box>

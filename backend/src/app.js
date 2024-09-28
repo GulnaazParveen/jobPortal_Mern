@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import cors from 'cors';
 
 dotenv.config({
-  path: "./.env",
+  path: ".env",
 });
 
 // cors 
@@ -21,10 +21,11 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 // routes import
 import userRouter from './routes/user.route.js';
 
+import emloyerRouter from './routes/employer.route.js'
 
 // route declaration
 app.use("/api/v1/users", userRouter)
-
+app.use("/api/v1/employers", emloyerRouter);
 
 
 

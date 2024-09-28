@@ -1,6 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import job from "../models/createJob.js";
-import employerModel from "../models/employerLogin.js";
+import employerModel from "../models/employerRegister.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 const createJob = asyncHandler(async (req, res) => {

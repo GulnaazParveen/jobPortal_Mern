@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect } from "react";
-import "./postjobform.css"; // Import the external CSS file
+import React, { useState} from "react";
+import "./postjobform.css";
 import TipTap from "./TipTap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,12 @@ import { auth } from "../../firebase";
 const PostJobForm = () => {
   const navigate = useNavigate();
   const { id } = useParams(); // Extract the job ID from the URL parameters
+  const employerData = JSON.parse(localStorage.getItem("employer"));
+  const employerId = employerData?._id || ""; // Ensure employerId is available
+
+
   const [formData, setFormData] = useState({
+    employerId: employerId,
     name: "",
     email: "",
     password: "",
@@ -22,6 +27,38 @@ const PostJobForm = () => {
     location: "",
     jobDescription: "",
   });
+  
+  // In handleSubmit function
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const user = auth.currentUser;
+    if (!user) {
+      console.error("No user is logged in.");
+      return;
+    }
+
+    const method = id ? "put" : "post";
+    const url = id
+      ? `http://localhost:8000/api/v1/Jobs/employer/${id}`
+      : "http://localhost:8000/api/v1/Jobs/createJob";
+
+    try {
+      const response = await axios({
+        method: method,
+        url: url,
+        data: { ...formData, employerId: employerData._id }, // Use correct employerId
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log("Job saved successfully:", response.data);
+      navigate("/browseJob");
+    } catch (error) {
+      console.error("Error saving job:", error);
+    }
+  };
 
 
   const handleChange = (e) => {
@@ -45,39 +82,6 @@ const PostJobForm = () => {
       jobDescription: plainText, // Save the plain text string
     }));
   };
-
- const handleSubmit = async (e) => {
-   e.preventDefault();
-
-   const user = auth.currentUser;
-   if (!user) {
-     console.error("No user is logged in.");
-     return;
-   }
-
-   const employerId = user.uid;
-   const method = id ? "put" : "post";
-   const url = id
-     ? `http://localhost:8000/api/updateJob/${id}`
-     : "http://localhost:8000/api/v1/users/postjob";
-
-   try {
-     const response = await axios({
-       method: method,
-       url: url,
-       data: { ...formData, employerId },
-       headers: {
-         "Content-Type": "application/json",
-       },
-     });
-
-     console.log("Job saved successfully:", response.data);
-     navigate("/browseJob");
-   } catch (error) {
-     console.error("Error saving job:", error);
-   }
- };
-
 
   return (
     <div className="form-Employer-container">
@@ -105,7 +109,7 @@ const PostJobForm = () => {
           <input
             type="text"
             name="phone"
-            placeholder="Phone Number"
+            placeholder="Alternate Phone Number"
             value={formData.phone}
             onChange={handleChange}
             className="input"

@@ -1,29 +1,21 @@
 import React from 'react'
 import LoginWithGoogle from './LoginWithGoogle';
+import { useSelector } from 'react-redux';
+const Login = ({ handleChangeLogin, handleLoginUser, loginData}) => {
 
-
-const Login = ({ handleChangeLogin, handleLoginUser, loginData ,isLoginUser}) => {
+const {error}=useSelector((state)=>state.auth)  
   return (
     <>
       <div className="google-sign-container">
-        <p
-          style={{
-            fontSize: "1.3rem",
-            fontWeight: "800",
-            fontFamily: " Montserrat, sans-serif",
-          }}
-        >
-          Login
-        </p>
         <form onSubmit={handleLoginUser} className="form">
           <input
             type="email"
-            name='email'
+            name="email"
             value={loginData.email}
             onChange={handleChangeLogin}
             placeholder="Email"
             style={{
-              width: "300px",
+              width: "400px",
               margin: "10px 0",
               height: "35px",
             }}
@@ -35,7 +27,7 @@ const Login = ({ handleChangeLogin, handleLoginUser, loginData ,isLoginUser}) =>
             value={loginData.password}
             onChange={handleChangeLogin}
             style={{
-              width: "300px",
+              width: "400px",
               margin: "10px 0",
               height: "35px",
             }}
@@ -44,9 +36,9 @@ const Login = ({ handleChangeLogin, handleLoginUser, loginData ,isLoginUser}) =>
             type="submit"
             onClick={handleLoginUser}
             style={{
-              width: "300px",
+              width: "400px",
               margin: "10px 0",
-              height: "40px",
+              height: "35px",
               backgroundColor: "#00D363",
               fontWeight: "700",
               fontSize: "1.2rem",
@@ -57,15 +49,11 @@ const Login = ({ handleChangeLogin, handleLoginUser, loginData ,isLoginUser}) =>
           </button>
         </form>
       </div>
-      {isLoginUser && <p style={{ color: "red" }}>{isLoginUser}</p>}
-      <div className="form-bottom">
-        <p style={{ textTransform: "capitalize", fontSize: "1.1rem" }}>
-          New User ?
+      {error && (
+        <p style={{ color: "red", textAlign: "center", fontWeight: "600" }}>
+          {error}
         </p>
-        <a href="" style={{ textDecoration: "none" }}>
-          Signup Now
-        </a>
-      </div>
+      )}
       <LoginWithGoogle />
     </>
   );

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const jobSchema = new mongoose.Schema({
   employer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "employer",
+    ref: "Employer",
     required: true,
   },
   name: {
@@ -48,7 +48,7 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-});
+},{timestamps:true});
 
 const job = mongoose.model("job", jobSchema);
 

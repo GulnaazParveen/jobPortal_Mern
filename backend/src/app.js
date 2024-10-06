@@ -20,13 +20,13 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 
 // routes import
 import userRouter from './routes/user.route.js';
-
 import emloyerRouter from './routes/employer.route.js'
+import jobsRouter from "./routes/jobsCrud.route.js";
 
 // route declaration
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/employers", emloyerRouter);
-
+app.use("/api/v1/Jobs",jobsRouter)
 
 
 export {app}

@@ -38,6 +38,8 @@ export const LoginEmployer= (loginData) => async (dispatch) => {
        console.log("login successfully",response);
        
        const employerData=response.data.data.loggedEmployer
+       console.log("employer data",employerData);
+       
       const token = response.data.data.accessToken;
         
       //  give data to action

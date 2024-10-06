@@ -13,59 +13,129 @@ import EmployerRegister from "../employer/EmployerRegister";
 import { LoginEmployer } from "../../features/EmployerSlice";
 import EmployerLogin from "../employer/EmployerLogin";
 
+// const Post = () => {
+//   const dispatch = useDispatch();
+//   const navigate= useNavigate()
+//   const [ismodelopen, setModelOpen] = useState(false);
+
+//    after sign in our result is store in redux store now  access the data from redux store
+//    const employerAccountDetails = useSelector(
+//      (state) => state.employer.employer
+//    );
+
+//   const handleEmployerSignIn = async () => {
+//     try {
+//       const result = await signInWithPopup(auth, provider);
+//       const employerSignData = result.user;
+      
+//       if (!employerSignData) {
+//         throw new Error("No user data found");
+//       }
+//       dispatch(
+//         setEmployer({
+//           uid: employerSignData.uid,
+//           displayName: employerSignData.displayName,
+//           email: employerSignData.email,
+//           photoURL: employerSignData.photoURL,
+//         })
+//       );
+//       console.log("Sign-in successful", employerSignData); // Debug: Log successful sign-in data
+//      const config = {
+//        headers: {
+//          "Content-Type": "application/json",
+//        },
+//      };
+//      const body = {
+//        employerId: employerSignData.uid,
+//        EmployerName: employerSignData.displayName,
+//        email: employerSignData.email,
+//        EmployerPhotoUrl: employerSignData.photoURL,
+//      };
+
+//      const employerData = await axios.post(
+//        "http://localhost:8000/api/employerLogin",
+//        body,
+//        config
+//      );
+//      console.log(employerData);
+//       // Navigate to post job form after successful sign-in
+//       navigate("/postjobform");
+//     } catch (error) {
+//       console.error("Error signing in: ", error);
+//       dispatch(clearEmployer());
+//     }
+//   };
+  
+//    const [isSignIn, setIsSignIn] = useState(true);
+
+//    const handleSignUpClick = () => {
+//      setIsSignIn(false);
+//    };
+//    // Handlers for switching tabs
+//    const handleSignInClick = () => {
+//      setIsSignIn(true);
+//    };
+
+//  const [isRegister,setRegisterEmployer]=useState(false)
+//   const [employerRegisterData,setEmployerRegister]=useState({
+//     name:"",
+//     email:"",
+//     password:"",
+//     mobileNumber:"",
+//     Address:"",                                                                                            
+//   })
+
+//   const handleRegisterEmployer=(e)=>{
+//     e.preventDefault()
+//     axios.post(
+//         "http://localhost:8000/api/v1/employers/registerEmployer",
+//         employerRegisterData
+//       )
+//       .then((response) => console.log("register successfully", response.data))
+//       .catch((error) => console.log("error in register",error));
+//       setRegisterEmployer(true);
+//   }
+
+//   const handleChange = (e) => {
+//     setEmployerRegister({
+//       ...employerRegisterData,
+//       [e.target.name]: e.target.value,
+//     });
+//   };
+
+//   // login employer 
+
+//   const [loginData, setLoginData] = useState({
+//     email: "",
+//     password: "",
+//   });
+
+//   const handleChangeLogin = (e) => {
+//     setLoginData({
+//       ...loginData, 
+//       [e.target.name]: e.target.value, 
+//     });
+//   };
+//   // Handle login user logic
+//   const handleLoginEmployer = (e) => {
+//     e.preventDefault();
+//     dispatch(LoginEmployer(loginData));
+
+//   };
+
+
+//   return (
+   
+//   );
+// };
+
+// export default Post;
+// import React from 'react'
+
 const Post = () => {
-  const dispatch = useDispatch();
+ const dispatch = useDispatch();
   const navigate= useNavigate()
   const [ismodelopen, setModelOpen] = useState(false);
-
-  //  after sign in our result is store in redux store now  access the data from redux store
-  //  const employerAccountDetails = useSelector(
-  //    (state) => state.employer.employer
-  //  );
-
-  // const handleEmployerSignIn = async () => {
-  //   try {
-  //     const result = await signInWithPopup(auth, provider);
-  //     const employerSignData = result.user;
-      
-  //     if (!employerSignData) {
-  //       throw new Error("No user data found");
-  //     }
-  //     dispatch(
-  //       setEmployer({
-  //         uid: employerSignData.uid,
-  //         displayName: employerSignData.displayName,
-  //         email: employerSignData.email,
-  //         photoURL: employerSignData.photoURL,
-  //       })
-  //     );
-  //     console.log("Sign-in successful", employerSignData); // Debug: Log successful sign-in data
-  //    const config = {
-  //      headers: {
-  //        "Content-Type": "application/json",
-  //      },
-  //    };
-  //    const body = {
-  //      employerId: employerSignData.uid,
-  //      EmployerName: employerSignData.displayName,
-  //      email: employerSignData.email,
-  //      EmployerPhotoUrl: employerSignData.photoURL,
-  //    };
-
-  //    const employerData = await axios.post(
-  //      "http://localhost:8000/api/employerLogin",
-  //      body,
-  //      config
-  //    );
-  //    console.log(employerData);
-  //     // Navigate to post job form after successful sign-in
-  //     navigate("/postjobform");
-  //   } catch (error) {
-  //     console.error("Error signing in: ", error);
-  //     dispatch(clearEmployer());
-  //   }
-  // };
-  
    const [isSignIn, setIsSignIn] = useState(true);
 
    const handleSignUpClick = () => {
@@ -123,9 +193,8 @@ const Post = () => {
 
   };
 
-
   return (
-    <div>
+     <div>
       <div className="post-container">
         <div className="post-image">
           <img src={postjob} alt="" />
@@ -257,7 +326,7 @@ const Post = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Post;
+export default Post

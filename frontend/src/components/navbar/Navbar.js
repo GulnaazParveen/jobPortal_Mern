@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
 import "./navbar.css";
 import { Divider, Modal, Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -24,15 +24,10 @@ import { logoutEmployer } from "../../features/EmployerSlice";
 const Navbar = () => {
   const [ismodelopen, setModelOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  // const user = useSelector((state) => state.auth.user);
-  const employer = useSelector((state) => state.employer.employer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, loading, error} = useSelector((state) => state.auth); // Access auth state
- 
-  
-
+  const { user, loading, error } = useSelector((state) => state.auth); // Access auth state
 
   // register user logic
   const [userData, setUserData] = useState({
@@ -41,7 +36,7 @@ const Navbar = () => {
     password: "",
     avatar: null,
   });
-  const [IsRegisterUser, setRegisterUser] = useState(false);
+  const [IsRegisterUser, setRegisterUser] = useState(true);
   const [Error, setError] = useState(false);
 
   const handleChange = (e) => {
@@ -82,8 +77,6 @@ const Navbar = () => {
   };
 
   // login user logic
-  const [isLoginUser, setLoginUser] = useState(false);
-  // const [user, setDataAfterLogin] = useState(null);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -91,27 +84,29 @@ const Navbar = () => {
 
   const handleChangeLogin = (e) => {
     setLoginData({
-      ...loginData, // Spread the previous state to keep other values
-      [e.target.name]: e.target.value, // Update the specific field
+      ...loginData, 
+      [e.target.name]: e.target.value, 
     });
   };
+
   // Handle login user logic
   const handleLoginUser = (e) => {
     e.preventDefault();
-    dispatch(loginUser(loginData)); // Dispatch login action
-    loading(true)
+    dispatch(loginUser(loginData)); 
   };
-  // Monitor `user` state change after login
-  useEffect(() => {
-    if (user) {
-      console.log("Login successful, user data:", user); // Confirm user data
-      navigate("/");
-    }
-  }, [user, navigate]); // useEffect runs when `user` or `navigate` changes
 
   const handleLogout = () => {
     dispatch(logoutUser());
   };
+
+  // switching tab
+  const handleSignUpClick=()=>{
+  setRegisterUser(false)
+  }
+
+  const handleSignInClick=()=>{
+    setRegisterUser(true)
+  }
 
   // Dropdown menu
   const [anchorEl, setAnchorEl] = useState(null);
@@ -122,10 +117,6 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  
-
-  
 
   // handle user signIn
   const handleUserSignIn = async () => {
@@ -179,19 +170,11 @@ const Navbar = () => {
     }
   }, [employerId]);
 
-const handleLogoutEmployer=()=>{
-  dispatch(logoutEmployer())
-}
-  // custom fetching data from form
-    const employerdata = useSelector((state) => state.employer.employer);
-
-    useEffect(() => {
-       console.log("Employer data:", employerdata);
-      if (employerdata) {
-        navigate("/");
-      }
-    }, [employerdata,navigate]);
-
+  const handleLogoutEmployer = () => {
+    dispatch(logoutEmployer());
+  };
+  // // custom fetching data from form
+  const employerdata = useSelector((state) => state.employer.employer);
 
   return (
     <div className="container">
@@ -227,17 +210,6 @@ const handleLogoutEmployer=()=>{
                 className="link"
               >
                 Browse Job
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/pages"
-                style={({ isActive }) => {
-                  return { color: isActive ? "#00D363" : "" };
-                }}
-                className="link"
-              >
-                Pages
               </NavLink>
             </li>
             <li>
@@ -323,8 +295,8 @@ const handleLogoutEmployer=()=>{
             <Box
               className="form-container"
               sx={{
-                width: 600,
-                height: 400,
+                width: 550,
+                height: 500,
                 bgcolor: " #ffffff",
                 p: 4,
                 position: "relative",
@@ -337,23 +309,54 @@ const handleLogoutEmployer=()=>{
               >
                 <CloseIcon />
               </IconButton>
-              {IsRegisterUser ? (
-                <Login
-                  handleChangeLogin={handleChangeLogin}
-                  handleLoginUser={handleLoginUser}
-                  loginData={loginData}
-                  isLoginUser={isLoginUser}
-                />
-              ) : (
-                <UserRegister
-                  handleUserRegister={handleUserRegister}
-                  userData={userData}
-                  handleChange={handleChange}
-                  IsRegisterUser={IsRegisterUser}
-                  setRegisterUser={setRegisterUser}
-                  error={Error}
-                />
-              )}
+              <div className="formModal">
+                <div className="tab-header">
+                  <div
+                    className={IsRegisterUser ? "active active-styling" : ""}
+                    onClick={handleSignInClick}
+                    style={{
+                      fontSize: "1.3rem",
+                      fontWeight: "700",
+                      textAlign: "center",
+                      width: "300px",
+                      height: "40px",
+                    }}
+                  >
+                    Sign In
+                  </div>
+                  <div
+                    className={!IsRegisterUser ? "active active-styling" : ""}
+                    onClick={handleSignUpClick}
+                    style={{
+                      fontSize: "1.3rem",
+                      fontWeight: "700",
+                      textAlign: "center",
+                      width: "300px",
+                      height: "40px",
+                    }}
+                  >
+                    Sign Up
+                  </div>
+                </div>
+                <div className="form-content">
+                  {IsRegisterUser ? (
+                    <Login
+                      handleChangeLogin={handleChangeLogin}
+                      handleLoginUser={handleLoginUser}
+                      loginData={loginData}
+                    />
+                  ) : (
+                    <UserRegister
+                      handleUserRegister={handleUserRegister}
+                      userData={userData}
+                      handleChange={handleChange}
+                      IsRegisterUser={IsRegisterUser}
+                      setRegisterUser={setRegisterUser}
+                      error={Error}
+                    />
+                  )}
+                </div>
+              </div>
             </Box>
           </Modal>
           {employerdata ? (

@@ -11,7 +11,6 @@ const UserRegister = ({
   return (
     <>
       <div className="google-sign-container">
-        <p style={{ fontSize: "1.3rem", fontWeight: "600" }}>Signup</p>
         <div className="form-container">
           <form onSubmit={handleUserRegister} className="form">
             <input
@@ -21,7 +20,7 @@ const UserRegister = ({
               value={userData.userName}
               onChange={handleChange}
               style={{
-                width: "300px",
+                width: "400px",
                 margin: "10px 0",
                 height: "35px",
               }}
@@ -33,7 +32,7 @@ const UserRegister = ({
               value={userData.email}
               onChange={handleChange}
               style={{
-                width: "300px",
+                width: "400px",
                 margin: "10px 0",
                 height: "35px",
               }}
@@ -45,7 +44,7 @@ const UserRegister = ({
               value={userData.password}
               onChange={handleChange}
               style={{
-                width: "100%",
+                width: "400px",
                 margin: "10px 0",
                 height: "35px",
               }}
@@ -55,7 +54,7 @@ const UserRegister = ({
               name="avatar"
               onChange={handleChange}
               style={{
-                width: "300px",
+                width: "400px",
                 margin: "10px 0",
                 height: "35px",
               }}
@@ -63,27 +62,18 @@ const UserRegister = ({
             <button
               type="submit"
               style={{
-                width: "300px",
+                width: "400px",
                 margin: "10px 0",
                 height: "35px",
+                backgroundColor: "#00D363",
+                fontWeight: "700",
+                fontSize: "1.2rem",
+                color: " #ffffff",
               }}
             >
               Signup
             </button>
           </form>
-        </div>
-        <div className="form-bottom">
-          {IsRegisterUser ? (
-            <p>
-              New User?{" "}
-              <button onClick={() => setRegisterUser(false)}>Signup</button>
-            </p>
-          ) : (
-            <p>
-              Already registered?{" "}
-              <button onClick={() => setRegisterUser(true)}>Login</button>
-            </p>
-          )}
         </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>

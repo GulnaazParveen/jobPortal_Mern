@@ -52,11 +52,11 @@ export const loginUser = (loginData) => async (dispatch) => {
     console.log("user log in successfully", response.data);
 
     // Correcting the access to the accessToken and user
-    const token = response.data.data.accessToken; // Fix: Access nested data
-    const user = response.data.data.user; // Fix: Access nested data
+    const token = response.data.data.accessToken; 
+    const user = response.data.data.user; 
 
     // Logging to verify the values are correct
-    console.log("getting token", token); // Should log the correct accessToken
+    console.log("getting token", token);
     console.log("getting user", user); // Should log the user object
 
     // Store token and user in localStorage

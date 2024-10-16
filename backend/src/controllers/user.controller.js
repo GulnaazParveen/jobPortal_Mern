@@ -3,7 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-
+import jwt from "jsonwebtoken"
 
 const generateAccessAndRefereshTokens = async (userId) => {
   try {
@@ -74,54 +74,104 @@ const registerUser = asyncHandler(async (req, res) => {
 
 // login user
 const loginUser=asyncHandler(async (req,res)=>{
-    const {email,password}=req.body;
-    if (!email) {
-      throw new ApiError(400, " email is required");
+  const { email, password } = req.body;
+  if (!email) {
+    throw new ApiError(400, " email is required");
+  }
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    throw new ApiError(404, "User does not exist");
+  }
+
+  const isPasswordValid = await user.isPasswordCorrect(password);
+
+  if (!isPasswordValid) {
+    throw new ApiError(401, "Invalid user credentials");
+  }
+
+  const { accessToken, refreshToken } = await generateAccessAndRefereshTokens(
+    user._id
+  );
+  // // here again  find  user  based on userid because initaily user has not refresh token  and we had passed on  user_id  into  this function  that has not refersh token generateAccessAndRefereshTokens(
+  //   user._id
+  // );  when save refreshtoken into database  now we  need to refreshtoken for sending to coookie   so that's why   we need to update this user object  "user " that will use to sending to cookie or find user based on this user.id  to databased that updated recently
+  const loggedInUser = await User.findById(user._id).select(
+    "-password -refreshToken"
+  );
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
+      .json(
+        new ApiResponse(
+          200,
+          {
+            user: loggedInUser,
+            accessToken,
+            refreshToken,
+          },
+          "User logged In Successfully"
+        )
+      );
+
+})
+const logoutUser = asyncHandler(async (req, res) => {
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $unset: {
+        refreshToken: 1, 
+      },
+    },-                                                            
+    
+    {
+      new: true,
     }
+  );
 
-    const user = await User.findOne({email});
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
 
-    if (!user) {
-      throw new ApiError(404, "User does not exist");
-    }
+  return res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(200, {}, "User logged Out"));
+});
 
-    const isPasswordValid = await user.isPasswordCorrect(password);
-
-    if (!isPasswordValid) {
-      throw new ApiError(401, "Invalid user credentials");
-    }
-
-    const { accessToken, refreshToken } = await generateAccessAndRefereshTokens(
-      user._id
-    );
-
-    // // here again  find  user  based on userid because initaily user has not refresh token  and we had passed on  user_id  into  this function  that has not refersh token generateAccessAndRefereshTokens(
-    //   user._id
-    // );  when save refreshtoken into database  now we  need to refreshtoken for sending to coookie   so that's why   we need to update this user object  "user " that will use to sending to cookie or find user based on this user.id  to databased that updated recently
-     const loggedInUser = await User.findById(user._id).select(
-       "-password -refreshToken"
-     );
-
-     const options = {
-       httpOnly: true,
-       secure: true,
-     };
-
-     return res
-       .status(200)
-       .cookie("accessToken", accessToken, options)
-       .cookie("refreshToken", refreshToken, options)
-       .json(
-         new ApiResponse(200,
-           {
-            // this user used because server send data to fronted 
-             user: loggedInUser,
-             accessToken,
-             refreshToken,
-           },
-           "User logged In Successfully"
-         )
-       );
+const refreshAccessToken=asyncHandler(async(req,res)=>{
+  const incomingRefreshToken=req.cookies.refreshToken  || req.body.refreshToken
+  if(!incomingRefreshToken){
+    throw new ApiError(400,"unauthorized request")
+  }
+  const decodedToken=jwt.verify(incomingRefreshToken,process.env.REFRESH_TOKEN_SECRET)
+  const user= await User.findById(decodedToken._id)
+  if(!user){
+    throw new ApiError(400,"invalid refreshToken or plz login ")
+  }
+  if(incomingRefreshToken!=user?.refreshToken){
+    throw new ApiError(401,"Refresh token is expired")
+  }
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+  const {accessToken,newRefreshoken}= await generateAccessAndRefereshTokens(user._id)
+  res
+    .status(200)
+    .cookies("accessToken", accessToken, options)
+    .cookies("refreshToken", newRefreshoken,options)
+    .json(new ApiResponse(200,{accessToken,newRefreshoken},"Access token refreshed"))
 })
 
-export {registerUser,loginUser}
+export {registerUser,loginUser,logoutUser,refreshAccessToken}

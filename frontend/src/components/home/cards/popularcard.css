@@ -1,0 +1,40 @@
+
+
+.popular-card {
+    background-color: var(--background-color-2);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    height: 100px;
+    color: var(--color-black);
+    border-radius: var(--borderd-radius);
+}
+
+.category-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.category-content{
+    margin: 0.2rem 0 0 0;
+}
+.available-position {
+    border-radius: var(--borderd-radius);
+    background-color: var(--light-purple);
+    width: 30px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.1rem 0.5rem 0 0;
+}
+.available-text{
+color: var(--color-gray);
+}
+ 
+.category-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

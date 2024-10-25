@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+const API_URL = process.env.REACT_APP_API_URL;
 const initialState={
     employer: JSON.parse(localStorage.getItem("employer")) || null, 
     token:localStorage.getItem("token") || null
@@ -28,7 +29,7 @@ export const LoginEmployer= (loginData) => async (dispatch) => {
  try{
 
        const response = await axios.post(
-         "http://localhost:8000/api/v1/employers/loginEmployer",
+         `${API_URL}/api/v1/employers/loginEmployer`,
          loginData,
          {
            headers: { "Content-Type": "application/json" },

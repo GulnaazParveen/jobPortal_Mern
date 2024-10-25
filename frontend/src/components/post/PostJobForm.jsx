@@ -10,7 +10,7 @@ const PostJobForm = () => {
   const { id } = useParams(); // Extract the job ID from the URL parameters
   const employerData = JSON.parse(localStorage.getItem("employer"));
   const employerId = employerData?._id || ""; // Ensure employerId is available
-
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const [formData, setFormData] = useState({
     employerId: employerId,
@@ -40,8 +40,8 @@ const PostJobForm = () => {
 
     const method = id ? "put" : "post";
     const url = id
-      ? `http://localhost:8000/api/v1/Jobs/employer/${id}`
-      : "http://localhost:8000/api/v1/Jobs/createJob";
+      ? `${API_URL}/api/v1/Jobs/employer/${id}`
+      : `${API_URL}/api/v1/Jobs/createJob`;
 
     try {
       const response = await axios({

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+const API_URL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials=true
 // Initial state for authentication
 const initialState = {
@@ -42,7 +43,7 @@ export const loginUser = (loginData) => async (dispatch) => {
     dispatch(loginStart());
 
     const response = await axios.post(
-      "http://localhost:8000/api/v1/users/login",
+      `${ API_URL}/api/v1/users/login`,
       loginData,
       {
         headers: { "Content-Type": "application/json" },
@@ -72,7 +73,7 @@ export const loginUser = (loginData) => async (dispatch) => {
   export const logoutUser = () => async (dispatch) => {
     try {
       // Make the request to log out the user on the backend
-      const response = await axios.post("http://localhost:8000/api/v1/users/logout", {},{ withCredentials: true });
+      const response = await axios.post(`${ API_URL}/api/v1/users/logout`, {},{ withCredentials: true });
 
       console.log("Logout user successfully:", response);
 

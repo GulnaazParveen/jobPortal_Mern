@@ -137,7 +137,7 @@ const Post = () => {
   const navigate= useNavigate()
   const [ismodelopen, setModelOpen] = useState(false);
    const [isSignIn, setIsSignIn] = useState(true);
-
+    const API_URL = process.env.REACT_APP_API_URL;
    const handleSignUpClick = () => {
      setIsSignIn(false);
    };
@@ -157,12 +157,13 @@ const Post = () => {
 
   const handleRegisterEmployer=(e)=>{
     e.preventDefault()
-    axios.post(
-        "http://localhost:8000/api/v1/employers/registerEmployer",
+    axios
+      .post(
+        `${API_URL}/api/v1/employers/registerEmployer`,
         employerRegisterData
       )
       .then((response) => console.log("register successfully", response.data))
-      .catch((error) => console.log("error in register",error));
+      .catch((error) => console.log("error in register", error));
       setRegisterEmployer(true);
   }
 

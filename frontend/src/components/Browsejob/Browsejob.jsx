@@ -16,17 +16,16 @@ const Browsejob = () => {
   const location = searchParams.get("location") || "";
   const employmentType = searchParams.get("employmentType") || "";
   const experienceLevel = searchParams.get("experienceLevel") || "";
-
+  const API_URL = process.env.REACT_APP_API_URL;
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/users/getjob", {
+      .get(`${API_URL}/api/v1/users/getjob`, {
         withCredentials: true,
       })
       .then((res) => {
-                 
         const jobsData = res.data.data;
         setJobs(jobsData); // Set the array of jobs
-        
+
         setLoading(false);
       })
       .catch((error) => {

@@ -10,6 +10,62 @@
     position: relative;
     margin: 0 1rem;
 }   
+
+/* dashboard container */
+.dashboard-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.pieChart-container{
+    display: flex;
+        justify-content: center;
+        align-items: center;
+}
+.piechart-barchart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.piechart-linechart{
+display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;
+}
+.applicant-header{
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+.applicantpiechart{
+background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 550px;
+        height: 450px;
+    box-shadow: 0 4px 8px 0 rgba(240, 240, 240, 0.992), 0 6px 20px 0 rgba(240, 240, 240, 0.992);
+    margin: 0 1.5rem ;
+}
+.applicantlinechart{
+        background-color: var(--color-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: var(--borderd-radius);
+            width: 550px;
+            margin: 0 2rem;
+            margin-top: 1.7rem;
+            margin-left: 3rem;
+            height: 400px;
+            box-shadow: 0 4px 8px 0 rgba(240, 240, 240, 0.992), 0 6px 20px 0 rgba(240, 240, 240, 0.992);
+}
 .managejob-subcont{
    margin-top: 1rem;
     width: 95%;

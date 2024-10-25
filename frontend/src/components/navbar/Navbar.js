@@ -26,7 +26,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const API_URL = process.env.REACT_APP_API_URL;
+  
   const { user, loading, error } = useSelector((state) => state.auth); // Access auth state
 
   // register user logic
@@ -60,7 +61,7 @@ const Navbar = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/users/registerUser",
+        `${API_URL}/api/v1/users/registerUser`,
         formData,
         {
           headers: {
@@ -157,11 +158,10 @@ const Navbar = () => {
 
   const { employerId } = useParams();
   //  console.log(id);
-
   useEffect(() => {
     if (employerId) {
       axios
-        .get(`http://localhost:8000/api/employer/${employerId}`)
+        .get(`${API_URL}/api/employer/${employerId}`)
         .then((response) => {
           console.log(response.data); // Log the response to check the data structure
           setJobsBasedEmployerId(response.data);

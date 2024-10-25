@@ -3,19 +3,26 @@ import JobitemList from './JobitemList';
 import "./managejob.css"
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import DemographicPieChart from '../employer/DemographicPieChart';
+
+import ApplicantTrendsLineChart from '../employer/ApplicantTrendsLineChart';
+import ApplicantPieChart from '../employer/ApplicantPieChart';
+import JobViewsBarChart from '../employer/JobViewsBarChart';
+
+
 
 const Managejob = () => {
     const [jobs, setJobs] = useState([]);
      const [jobCount, setJobCount] = useState(0);
     const {id}=useParams()
+     const API_URL = process.env.REACT_APP_API_URL;
 useEffect(() => {
   if (id) {
     axios
-      .get(`http://localhost:8000/api/v1/Jobs/employer/${id}`)
-      .then((response) =>{
+      .get(`${API_URL}/api/v1/Jobs/employer/${id}`)
+      .then((response) => {
         setJobs(response.data.data);
-         setJobCount(response.data.noOfJobs);
-        
+        setJobCount(response.data.noOfJobs);
       })
       .catch((error) => console.error("Error fetching job data:", error));
   }
@@ -24,6 +31,24 @@ useEffect(() => {
 
   return (
     <>
+      <div className="dashboard-container">
+        <div className="piechart-barchart">
+          <div className="applicantlinechart">
+            <JobViewsBarChart />
+          </div>
+          <div className="applicantpiechart">
+            <DemographicPieChart />
+          </div>
+        </div>
+        <div className="piechart-linechart">
+          <div className="applicantpiechart">
+            <ApplicantPieChart />
+          </div>
+          <div className="applicantlinechart">
+            <ApplicantTrendsLineChart />
+          </div>
+        </div>
+      </div>
       <div className="manageJob-Container">
         <div className="managejob-subcont">
           <div className="managejob-Heading">

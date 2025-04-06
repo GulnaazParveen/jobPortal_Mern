@@ -12,7 +12,6 @@ const Browsejob = () => {
   const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
-  const category = searchParams.get("experienceLevel") || "";
   const location = searchParams.get("location") || "";
   const employmentType = searchParams.get("employmentType") || "";
   const experienceLevel = searchParams.get("experienceLevel") || "";
@@ -24,7 +23,9 @@ const Browsejob = () => {
       })
       .then((res) => {
         const jobsData = res.data.data;
-        setJobs(jobsData); // Set the array of jobs
+        console.log("this is  job ",jobsData);
+        
+        setJobs(jobsData); 
 
         setLoading(false);
       })
@@ -62,19 +63,12 @@ const Browsejob = () => {
           job.experienceLevel.toLowerCase() === experienceLevel.toLowerCase()
       );
     }
-
-    if (category) {
-      filteredJobs = filteredJobs.filter(
-        (job) => job.category.toLowerCase() === category.toLowerCase()
-      );
-    }
-
     return filteredJobs;
   };
 
   const filteredJobs = useMemo(
     () => filterData(jobs),
-    [jobs, location, employmentType, experienceLevel, query, category]
+    [jobs, location, employmentType, experienceLevel, query]
   );
 
   return (

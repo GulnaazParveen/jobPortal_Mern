@@ -1,0 +1,35 @@
+.applicants-container{
+display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    position: relative;
+    border: 2px solid var(--color-gray);
+    border-right: none;
+    border-left: none;
+    box-sizing: var(--box-shadow);
+    height: 100px;
+    position: absolute;
+    top: 0;
+}
+
+.copmanyDetails{
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+   width: 100%;
+}
+.applyDate{
+color: var(--color-gray);
+}
+.job-container{
+    margin-top: 0.5rem;
+    color: var(--color-gray);
+}
+.jobstatus{
+    height: 30px;
+    width: 150px;
+background-color: var(--light-purple);
+margin-top: 0.5rem;
+color: var(--color-black);
+}

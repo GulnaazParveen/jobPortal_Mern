@@ -14,6 +14,7 @@ import Contact from "./components/contact/Contact";
 import Layout from "./components/home/Layout";
 import PostJobForm from "./components/post/PostJobForm";
 import Managejob from "./components/post/Managejob";
+import Chat from "./components/messageNotification/Chat";
 function App() {
  const [employer, setEmployer] = useState(null);
  const [loading, setLoading] = useState(true); // Initialize loading state
@@ -22,10 +23,10 @@ function App() {
    const storedEmployer = localStorage.getItem("employer");
    if (storedEmployer) {
      setEmployer(JSON.parse(storedEmployer));
-   }
+   }   
    setLoading(false); // Set loading to false once data is fetched
  }, []);
-
+ 
  
  if (loading) {
    return <div>Loading...</div>; // Display this while employer data is being fetched
@@ -40,7 +41,7 @@ function App() {
           <Route path="post" element={<Post />} />
 
           <Route element={<UserRouteProtected />}>
-            {/* Add specific user routes if needed */}
+            <Route path="user/chat/:id" element={<Chat />} />
           </Route>
           <Route
             path="postjobform"
@@ -50,6 +51,7 @@ function App() {
             path="manageJob/:id"
             element={employer ? <Managejob /> : <Outlet />}
           />
+          <Route path="employer/chat/:id" element={employer ? <Chat /> : ""} />
         </Route>
       </Routes>
     </Router>

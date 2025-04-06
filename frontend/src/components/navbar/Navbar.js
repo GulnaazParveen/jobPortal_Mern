@@ -6,20 +6,21 @@ import "./navbar.css";
 import { Divider, Modal, Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import "react-responsive-modal/styles.css";
-import { auth, provider } from "../../firebase";
-import { signInWithPopup } from "firebase/auth";
+
 import { useDispatch } from "react-redux";
 import { setUser, clearUser } from "../../features/Features";
 import { useSelector } from "react-redux";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+
 // import { clearEmployer } from "../../features/EmployerSlice";
 import axios from "axios";
 import Login from "./authentication/LoginUser";
 import UserRegister from "./authentication/UserRegister";
 import { loginUser,logoutUser} from "../../features/authSlice";
 import { logoutEmployer } from "../../features/EmployerSlice";
+import MessageNotification from "../messageNotification/MessageNotification";
 
 const Navbar = () => {
   const [ismodelopen, setModelOpen] = useState(false);
@@ -32,7 +33,7 @@ const Navbar = () => {
 
   // register user logic
   const [userData, setUserData] = useState({
-    userName: "",
+    name: "",
     email: "",
     password: "",
     avatar: null,
@@ -52,7 +53,7 @@ const Navbar = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("userName", userData.userName);
+    formData.append("name", userData.name);
     formData.append("email", userData.email);
     formData.append("password", userData.password);
     if (userData.avatar) {
@@ -117,25 +118,6 @@ const Navbar = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  // handle user signIn
-  const handleUserSignIn = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      dispatch(
-        setUser({
-          uid: user.uid,
-          displayName: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
-        })
-      );
-    } catch (error) {
-      console.error("Error signing in: ", error);
-      dispatch(clearUser());
-    }
   };
 
   useEffect(() => {
@@ -240,6 +222,7 @@ const Navbar = () => {
           <div className="account-btn">
             {user ? (
               <>
+                <MessageNotification user={user} />
                 <img
                   src={user.avatar}
                   alt={user.userName}
@@ -361,6 +344,7 @@ const Navbar = () => {
           </Modal>
           {employerdata ? (
             <>
+              <MessageNotification employerdata={employerdata}/>
               <img
                 src={getIndividualJobs.EmployerPhotoUrl}
                 alt={employerdata.name}

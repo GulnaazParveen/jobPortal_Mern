@@ -1,10 +1,9 @@
 import User from "../models/user.model.js";
+import jwt from "jsonwebtoken"
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import jwt from "jsonwebtoken"
-
 const generateAccessAndRefereshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -23,10 +22,10 @@ const generateAccessAndRefereshTokens = async (userId) => {
   }
 };
 const registerUser = asyncHandler(async (req, res) => {
-  const { userName, email, password } = req.body;
+  const { name, email, password } = req.body;
 
   // Validate user input
-  if ([userName, email, password].some((field) => field?.trim() === "")) {
+  if ([name, email, password].some((field) => field?.trim() === "")) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -35,27 +34,29 @@ const registerUser = asyncHandler(async (req, res) => {
   if (existedUser) {
     throw new ApiError(409, "User with email already exists");
   }
+  const avatarFile = req.files?.avatar?.[0];
+  console.log("Files:", req.files);
 
- 
-  const avatarLocalPath = req.files?.avatar[0]?.path;
+  if (!avatarFile) {
+    throw new ApiError(400, "Avatar file is required");
+  }
+
+  const avatarLocalPath = avatarFile.path; 
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar file is required");
   }
-  console.log(avatarLocalPath);
-  
-
   const avatarResponse = await uploadOnCloudinary(avatarLocalPath);
+  console.log("avatar", avatarResponse);
+
   if (!avatarResponse) {
     throw new ApiError(400, "Failed to upload avatar");
   }
-  console.log(avatarResponse);
-  
-  
+
   const avatarUrl = avatarResponse.secure_url; // Only store URL
-   
+
   // Create new user
   const user = await User.create({
-    userName: userName.toLowerCase(),
+    name: name.toLowerCase(),
     email,
     password,
     avatar: avatarUrl,

@@ -1,12 +1,7 @@
 import express from "express"
 const app=express()
-import dotenv from "dotenv";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
-
-dotenv.config({
-  path: ".env",
-});
 
 // cors 
 app.use(

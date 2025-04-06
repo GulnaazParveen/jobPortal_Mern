@@ -1,5 +1,4 @@
 import React from 'react'
-import LoginWithGoogle from '../navbar/authentication/LoginWithGoogle';
 const EmployerLogin = ({handleLoginEmployer,handleChangeLogin,loginData}) => {
   return (
     <>
@@ -49,7 +48,6 @@ const EmployerLogin = ({handleLoginEmployer,handleChangeLogin,loginData}) => {
           </button>
         </form>
       </div>
-      <LoginWithGoogle />
     </>
   );
 }

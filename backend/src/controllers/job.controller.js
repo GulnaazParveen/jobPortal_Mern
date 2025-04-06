@@ -76,7 +76,7 @@ const findAllJobs = asyncHandler(async (req, res) => {
 
 
 const findJobsByEmployerId = asyncHandler(async (req, res) => {
-  const { employerId } = req.params; // Get the employerId from the request params
+  const { employerId } = req.params; 
 
   
 
@@ -112,4 +112,58 @@ const noOfJobsByIndividualEmployer=await job.countDocuments({employer:employerId
 });
 
 
-export { createJob, findAllJobs, findJobsByEmployerId };
+// Get job by ID and increment jobViews
+const getJobByIdAndIncrementViews = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new ApiError(400, "Invalid Job ID");
+  }
+
+  const jobData = await job.findByIdAndUpdate(
+    id,
+    { $inc: { jobViews: 1 } },
+    { new: true }
+  );
+
+  if (!jobData) {
+    throw new ApiError(404, "Job not found");
+  }
+  // 🔍 Debug department field
+  console.log("📦 Job Data:", jobData);
+  console.log("📁 Department:", jobData.department);
+  return res
+    .status(200)
+    .json(new ApiResponse(200, jobData, "Job fetched and view incremented"));
+});
+const getViewsByDepartment = asyncHandler(async (req, res) => {
+  const jobs = await job.find({}, { department: 1, jobViews: 1 });
+  console.log(jobs);
+
+  const views = await job.aggregate([
+    {
+      $match: {
+        department: { $nin: [null, ""] }, // ✅ FIXED
+      },
+    },
+    {
+      $group: {
+        _id: "$department",
+        totalViews: { $sum: "$jobViews" }, // ✅ Make sure field is named exactly this
+      },
+    },
+  ]);
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, views, "Views by department fetched"));
+});
+
+
+export {
+  createJob,
+  findAllJobs,
+  findJobsByEmployerId,
+  getJobByIdAndIncrementViews,
+  getViewsByDepartment,
+};

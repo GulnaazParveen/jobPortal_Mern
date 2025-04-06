@@ -1,5 +1,4 @@
 .manageJob-Container {
-    height: 400px;
     border-radius: var(--borderd-radius);
     display: flex;
     justify-content: space-around;
@@ -9,67 +8,79 @@
     width: 100%;
     position: relative;
     margin: 0 1rem;
-}   
+    /* height: 400px; */
+}
 
 /* dashboard container */
-.dashboard-container{
+.dashboard-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.pieChart-container{
-    display: flex;
-        justify-content: center;
-        align-items: center;
-}
-.piechart-barchart{
+
+.summary-graph-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 5rem;
 }
 
-.piechart-linechart{
-display: flex;
+.pieChart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.piechart-barchart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-bottom: 5rem; */
+}
+
+.piechart-linechart {
+    display: flex;
     align-items: center;
     justify-content: center;
-    
     width: 100%;
 }
-.applicant-header{
+
+.applicant-header {
     margin-top: 1rem;
     margin-bottom: 0;
 }
-.applicantpiechart{
-background-color: var(--color-white);
+
+.applicantpiechart {
+    background-color: var(--color-white);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 550px;
-        height: 450px;
+    width: 500px;
+    height: 450px;
     box-shadow: 0 4px 8px 0 rgba(240, 240, 240, 0.992), 0 6px 20px 0 rgba(240, 240, 240, 0.992);
-    margin: 0 1.5rem ;
+
 }
-.applicantlinechart{
-        background-color: var(--color-white);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: var(--borderd-radius);
-            width: 550px;
-            margin: 0 2rem;
-            margin-top: 1.7rem;
-            margin-left: 3rem;
-            height: 400px;
-            box-shadow: 0 4px 8px 0 rgba(240, 240, 240, 0.992), 0 6px 20px 0 rgba(240, 240, 240, 0.992);
+
+.applicantlinechart {
+    background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--borderd-radius);
+    width: 500px;
+    margin-top: 1.7rem;
+    margin-left: 3rem;
+    height: 400px;
+    box-shadow: 0 4px 8px 0 rgba(240, 240, 240, 0.992), 0 6px 20px 0 rgba(240, 240, 240, 0.992);
 }
-.managejob-subcont{
-   margin-top: 1rem;
+
+.managejob-subcont {
+    margin-top: 1rem;
     width: 95%;
 }
+
 .managejob-Heading {
     display: flex;
     justify-content: flex-start;
@@ -78,153 +89,205 @@ background-color: var(--color-white);
     font-weight: 600;
     text-transform: capitalize;
     height: 60px;
- background-color: var(--light-purple);
- width: 100%;
+    background-color: var(--light-purple);
+    width: 100%;
 }
-.headingitems{
+
+.headingitems {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 300px;
     text-align: center;
 }
-.headingitems >p{
+
+.headingitems>p {
     color: var(--quartinary);
-        font-weight: 600;
-        text-transform: capitalize;
-        font-size: 1.1rem;
-     font-family:var(--font-family) ;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 1.1rem;
+    font-family: var(--font-family);
 }
-.applicant{
+
+.applicant {
     width: 160px;
 }
-.heading-item{
+
+.heading-item {
     width: 180px;
 }
-.mangajob-items{
-    width: 100%;
-    margin-top: 1rem;
-}
-/* jobitem list  */
 
-.jobPostedItem{
-   display: flex;
+.mangajob-items {
+    width: 100%;
+}
+
+/* jobitem list  */
+.matrices-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    margin-top: 1.3rem;
+    padding: 0 1rem;
+    height: 300px;
+    font-family: var(--font-family-2);
+    box-shadow: 0 4px 8px 0 rgba(240, 240, 240, 0.992), 0 6px 20px 0 rgba(240, 240, 240, 0.992)
+}
+
+.jobs-container,
+.applicant-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: var(--borderd-radius);
+    background-color: var(--background-color-2);
+    width: 300px;
+    height: 200px;
+    margin: 0 2rem;
+}
+
+.count {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.jobPostedItem {
+    display: flex;
     justify-content: space-around;
-    align-items: center;    
+    align-items: center;
     padding: 0.5rem 0;
 }
-.company-items{
+
+.company-items {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
 }
-.company-name{
+
+.company-name {
     width: 179px;
     font-size: 1.2rem;
     font-weight: 700;
     text-transform: capitalize;
 }
 
-.location{
-height: 18px;
+.location {
+    height: 18px;
     width: 18px;
 }
-.posted-company-name{
+
+.posted-company-name {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.company-item{
+
+.company-item {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
 }
-.applicant-Item ,.created,.status-container{
-width: 140px;
+
+.applicant-Item,
+.created,
+.status-container {
+    width: 140px;
     text-transform: capitalize;
     font-weight: 600;
     font-size: 1.2rem;
 }
-.company-location,.employmentType{
+
+.company-location,
+.employmentType {
     display: flex;
-        justify-content: center;
-        align-items: center;
-        color: var(--color-gray);
-        margin-top: 0.2rem;
-        margin-right: 1rem;
-        text-transform: capitalize;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-gray);
+    margin-top: 0.2rem;
+    margin-right: 1rem;
+    text-transform: capitalize;
 }
-.company-location> span{
+
+.company-location>span {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.applicants{
-display: flex;
+
+.applicants {
+    display: flex;
     justify-content: center;
     align-items: center;
     color: var(--quartinary);
     font-size: 1.2rem;
-        text-transform: capitalize;
-        font-weight: 600;
+    text-transform: capitalize;
+    font-weight: 600;
 }
-.postedDateNExpire{
-    display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      
-}
-.Date{
+
+.postedDateNExpire {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2rem;
-        text-transform: capitalize;
-        font-weight: 700;
-       width: 250px;
-      
+    flex-direction: column;
+
 }
 
-.post-date{
-    font-weight:600 ;
-    color: var(--color-gray);
-    font-size: 1.1rem;
-}
-.expiry-date{
-    font-weight: 600;
-    color: rgb(152, 5, 5);
-    font-size: 1.1rem;
-}
-.postStatus{
-display: flex;
+.Date {
+    display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
     text-transform: capitalize;
     font-weight: 700;
-        color: var(--secondary-color);
+    width: 250px;
+
 }
-.EmployerActions-Items{
+
+.post-date {
+    font-weight: 600;
+    color: var(--color-gray);
+    font-size: 1.1rem;
+}
+
+.expiry-date {
+    font-weight: 600;
+    color: rgb(152, 5, 5);
+    font-size: 1.1rem;
+}
+
+.postStatus {
     display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 102px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    font-weight: 700;
+    color: var(--secondary-color);
 }
-.action-icon{
+
+.EmployerActions-Items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 102px;
+}
+
+.action-icon {
     height: 40px;
     width: 70px;
-    background-color:var(--light-purple);
+    background-color: var(--light-purple);
     margin: 0.5rem;
     display: flex;
     justify-content: center;
     align-content: center;
-    
+
 }
-.actionIcon{
+
+.actionIcon {
     color: var(--quartinary);
-margin: 6px 0.4rem;
-height: 30px;
+    margin: 6px 0.4rem;
+    height: 30px;
     width: 30px;
 }

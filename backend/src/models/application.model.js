@@ -1,11 +1,24 @@
-import mongoose from "mongoose";
-import mongooseAggrigatePaginate from "mongoose-aggregate-paginate-v2"
-const userApplicationSchema=mongoose.Schema({
+import mongoose from 'mongoose';
+const applicantionSchema = new mongoose.Schema(
+  {
+    jobId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "job",
+      required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    source: {
+      type: String,
+      enum: ["CompanyWebsite", "Referral", "SocialMedia", "Email", "JobBoards"],
+      default: "CompanyWebsite",
+    },
+  },
+  { timestamps: true }
+);
 
-},{timestamps:true})
-
-// we are adding plugin so that we can do aggerigation query
-userApplicationSchema.plugin(mongooseAggrigatePaginate)
-
-const userApplication=mongoose.model("userApplication",userApplicationSchema)
-export default userApplication
+const application=mongoose.model("Application", applicantionSchema);
+export default application;

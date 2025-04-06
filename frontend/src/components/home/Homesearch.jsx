@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Homesearch = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+const [selectedExperienceLevel, setSelectedExperienceLevel] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
@@ -10,11 +10,11 @@ const Homesearch = () => {
 
   useEffect(() => {
     const queryParam = searchParams.get("query") || "";
-    const categoryParam = searchParams.get("experienceLevel") || "";
+    const experienceLevelParam = searchParams.get("experienceLevel") || "";
     const locationParam = searchParams.get("location") || "";
 
     setQuery(queryParam);
-    setSelectedCategory(categoryParam);
+   setSelectedExperienceLevel(experienceLevelParam);
     setSelectedLocation(locationParam);
   }, [searchParams]);
 
@@ -22,8 +22,8 @@ const Homesearch = () => {
     setQuery(event.target.value);
   };
 
-  const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value);
+  const handleExperienceLevelChange = (event) => {
+    setSelectedExperienceLevel(event.target.value);
   };
 
   const handleLocationChange = (event) => {
@@ -33,11 +33,11 @@ const Homesearch = () => {
   const handleSearch = () => {
     setSearchParams({
       query,
-      category: selectedCategory,
+      experienceLevel: selectedExperienceLevel,
       location: selectedLocation,
     });
     navigate(
-      `/browseJob?query=${query}&category=${selectedCategory}&location=${selectedLocation}`
+      `/browseJob?query=${query}&experienceLevel=${selectedExperienceLevel}&location=${selectedLocation}`
     );
   };
 
@@ -67,18 +67,17 @@ const Homesearch = () => {
           <option value="New York">New York</option>
         </select>
         <select
-          name="categories"
-          id="categories"
+          name="experienceLevel"
+          id="experienceLevel"
           className="dropdownmenu"
-          onChange={handleCategoryChange}
-          value={selectedCategory}
+          onChange={handleExperienceLevelChange}
+          value={selectedExperienceLevel}
         >
-          <option value="">Select Category</option>
           <option value="Internship">Internship</option>
           <option value="Junior">Junior</option>
           <option value="Mid-level">Mid-level</option>
+          <option value="">Entry-level</option>
           <option value="Senior">Senior</option>
-          <option value="Social Marketing">Social Marketing</option>
         </select>
         <div className="post-btn" onClick={handleSearch}>
           <p className="link">Find a Job</p>

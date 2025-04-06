@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useLocation, useMatch } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import Home from "./Home";
@@ -36,17 +36,30 @@ const Layout = () => {
     "/contact",
   ];
 
-   const isManageJobRoute = useMatch("/managejob/:id");
+  // Define the routes you want to check
+  const matchManageJob = useMatch("/managejob/:id");
+  const matchEmployerChat = useMatch("/employer/chat/:id");
+  const matchUserChat = useMatch("user/chat/:id");
 
-  // Check if the current route matches any of the containerRoutes
-  const isContainerRoute =containerRoutes.includes(location.pathname) || isManageJobRoute;;
+  // Check if any employer-related routes match
+  const isManageJobRoute = matchManageJob || matchEmployerChat;
+  const isManageChat = matchUserChat !== null;
+
   const isDynamicTextBasedOnRoutes = dynamicTextBasedOnRoutes.includes(
     location.pathname
   );
 
-  // check for target route then display dynamic content
- const isTargetRoute =dynamicContentBasedOnRoute.includes(location.pathname) || isManageJobRoute;
+  // Define user-related routes explicitly
+  const isUserRelatedRoute = isManageJobRoute || isManageChat;
 
+  // Check for routes that match containerRoutes or any user-related routes
+  const isContainerRoute =
+    containerRoutes.includes(location.pathname) || isUserRelatedRoute;
+
+  // Define isTargetRoute to exclude certain user-related routes if needed
+  const isTargetRoute =
+    dynamicContentBasedOnRoute.includes(location.pathname) &&
+    !isUserRelatedRoute;
 
   // Determine the class for heros-container based on the route
   const containerClass = isContainerRoute ? "banner-class" : "heros-container";
@@ -55,7 +68,8 @@ const Layout = () => {
   const dynamicTextDisplay = {
     browseJob: "4536+ Jobs Available",
     postjobform: "Enter post job details",
-    managejob: "Manage jobs", // If you want a general manage jobs text
+    managejob: "Manage jobs",
+    chat: "all the best", // If you want a general manage jobs text
     blogs: "Blogs",
     contact: "Contact",
     default: "",
@@ -76,7 +90,7 @@ const Layout = () => {
         />
       </div>
       <Outlet />
-      {!isTargetRoute && (
+      {!isTargetRoute && !isUserRelatedRoute && (
         <>
           <Categories />
           <ImageSlider />

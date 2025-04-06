@@ -24,16 +24,17 @@ const Card = ({data}) => {
               <h2 className="jobtitle">{data.jobTitle}</h2>
               <div className="card-content">
                 <div className="location-icon">
-                  <span>
-                    <PlaceIcon className="icon"/>
+                  <span>{/* <PlaceIcon className="icon"/> */}</span>
+                  <span className="icon-text">
+                    {data.location} || {data.category}
                   </span>
-                  <span className="icon-text">{data.location}|| {data.category}</span>
                 </div>
                 <div className="employementtype">
-                  <span>
-                    <AccessTimeFilledIcon className="icon"/>
-                  </span>
-                  <span className="icon-text">{data.employmentType}</span>
+                  <span>{/* <AccessTimeFilledIcon className="icon"/> */}</span>
+                  <span className="icon-text">{data.employmentType} || </span>
+                </div>
+                <div className="employementtype">
+                  <span className="icon-text">{data.experienceLevel}</span>
                 </div>
               </div>
             </div>

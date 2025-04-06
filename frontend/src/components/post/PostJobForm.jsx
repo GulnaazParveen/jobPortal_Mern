@@ -4,7 +4,6 @@ import TipTap from "./TipTap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { auth } from "../../firebase";
 const PostJobForm = () => {
   const navigate = useNavigate();
   const { id } = useParams(); // Extract the job ID from the URL parameters
@@ -22,6 +21,7 @@ const PostJobForm = () => {
     companyName: "",
     companyLogo: "",
     jobTitle: "",
+    department:"Engineering",
     employmentType: "Full-time",
     experienceLevel: "Entry Level",
     location: "",
@@ -32,11 +32,7 @@ const PostJobForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user = auth.currentUser;
-    if (!user) {
-      console.error("No user is logged in.");
-      return;
-    }
+ 
 
     const method = id ? "put" : "post";
     const url = id
@@ -96,14 +92,6 @@ const PostJobForm = () => {
             onChange={handleChange}
             className="input"
           />
-          <input
-            type="text"
-            name="websiteurl"
-            placeholder=" Website Url"
-            value={formData.websiteurl}
-            onChange={handleChange}
-            className="input"
-          />
         </div>
         <div className="grid">
           <input
@@ -140,6 +128,19 @@ const PostJobForm = () => {
             onChange={handleChange}
             className="input"
           />
+          <select
+            name=" department"
+            value={formData.department}
+            onChange={handleChange}
+            className="select"
+          >
+            <option value="Full-time">Engineering</option>
+            <option value="Part-time">Marketing</option>
+            <option value="Temporary">Design</option>
+            <option value="Contract">Product Management</option>
+            <option value="Full-time">HR</option>
+            <option value="Full-time">Sales</option>
+          </select>
         </div>
         <div className="grid">
           <select

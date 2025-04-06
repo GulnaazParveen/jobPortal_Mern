@@ -2,7 +2,8 @@ import employerModel from "../models/employerRegister.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-
+import job from "../models/createJob.js";
+import application from "../models/application.model.js";
 const generateAccessAndRefereshTokens = async (employerId) => {
   try {
     const employer = await employerModel.findById(employerId);
@@ -107,4 +108,52 @@ const generateAccessAndRefereshTokens = async (employerId) => {
        );
 })
 
-export {employerRegisters,loginEmployer}
+const employerDashboard=asyncHandler(async (req, res) => {
+     const totalJobs = await job.countDocuments();
+     const totalApplicants = await application.countDocuments();
+
+     const sourceBreakdown = await application.aggregate([
+       {
+         $group: {
+           _id: "$source",
+           count: { $sum: 1 },
+         },
+       },
+     ]);
+
+     // ✅ Trend data grouped by date and source
+     const applicantTrend = await application.aggregate([
+       {
+         $group: {
+           _id: {
+             date: {
+               $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+             },
+             source: "$source",
+           },
+           count: { $sum: 1 },
+         },
+       },
+       {
+         $project: {
+           date: "$_id.date",
+           source: "$_id.source",
+           count: 1,
+           _id: 0,
+         },
+       },
+       {
+         $sort: { date: 1 },
+       },
+     ]);
+
+     res.status(200).json( new ApiResponse(200, {
+       totalJobs,
+       totalApplicants,
+       sourceBreakdown,
+       applicantTrend,
+     }, "Dashboard data fetched successfully"));
+})
+
+
+export { employerRegisters, loginEmployer, employerDashboard };

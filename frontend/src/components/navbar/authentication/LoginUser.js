@@ -1,5 +1,4 @@
 import React from 'react'
-import LoginWithGoogle from './LoginWithGoogle';
 import { useSelector } from 'react-redux';
 const Login = ({ handleChangeLogin, handleLoginUser, loginData}) => {
 
@@ -54,7 +53,6 @@ const {error}=useSelector((state)=>state.auth)
           {error}
         </p>
       )}
-      <LoginWithGoogle />
     </>
   );
 };

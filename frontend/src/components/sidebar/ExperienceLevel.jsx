@@ -9,7 +9,11 @@ import { useSearchParams } from "react-router-dom";
 const ExperienceLevel = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const handleChange = (event) => {
-      searchParams.set("experienceLevel", event.target.value);
+       if (event.target.value === "remove"){
+          searchParams.delete("experienceLevel");
+       }else{
+        searchParams.set("experienceLevel", event.target.value);
+       }   
       setSearchParams(searchParams);
     };
   return (

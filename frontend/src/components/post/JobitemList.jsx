@@ -4,7 +4,7 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link } from "react-router-dom";
-const JobitemList = ({ job, jobCount }) => {
+const JobitemList = ({ job }) => {
 
  const formatDate = (isoString) => {
    const date = new Date(isoString);
@@ -20,7 +20,7 @@ const JobitemList = ({ job, jobCount }) => {
     <div className="jobPostedItem ">
       <div className="company-items">
         <div className="posted-company-name">
-          <span className="company-name">{job.companyName}</span>
+          <span className="company-name">{job.jobTitle}</span>
         </div>
         <div className="company-item">
           <div className="company-location">
@@ -35,8 +35,7 @@ const JobitemList = ({ job, jobCount }) => {
         </div>
       </div>
       <div className="applicant-Item">
-        <span>{jobCount} </span>
-        <span>applicants</span>
+        <span>Engineering</span>
       </div>
       <div className="created">
         <p>{formatDate(job.createdAt)}</p>

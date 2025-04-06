@@ -15,7 +15,7 @@ const UserRegister = ({
           <form onSubmit={handleUserRegister} className="form">
             <input
               type="text"
-              name="userName"
+              name="name"
               placeholder="Full Name..."
               value={userData.userName}
               onChange={handleChange}

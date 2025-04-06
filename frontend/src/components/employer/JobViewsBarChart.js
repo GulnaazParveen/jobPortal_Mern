@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -9,71 +9,36 @@ import {
   Legend,
 } from "chart.js";
 
-// Register the required components for the Bar chart
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const JobViewsBarChart = () => {
+const JobViewsBarChart = ({ departmentViews }) => {
   const [chartData, setChartData] = useState(null);
 
-  // Example job views data
-  const jobViewsData = [
-    { category: "Engineering", views: 300 },
-    { category: "Marketing", views: 250 },
-    { category: "Design", views: 150 },
-    { category: "Product Management", views: 200 },
-  ];
-
   useEffect(() => {
-    // Extracting job categories (not job titles) and view counts from the dataset
-    const jobCategories = jobViewsData.map((item) => item.category);
-    const views = jobViewsData.map((item) => item.views);
+    if (departmentViews.length > 0) {
+      const labels = departmentViews.map((d) => d.department || "Unknown");
+      const data = departmentViews.map((d) => d.count || 0);
 
-    // Setting up the data for the chart
-    setChartData({
-      labels: jobCategories, // X-axis labels (job categories)
-      datasets: [
-        {
-          label: "Number of Views",
-          data: views, // Y-axis values (views count)
-          backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
-          borderColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
-          borderWidth: 0.5,
-          barThickness: 60,
-        },
-      ],
-    });
-  }, []);
-
-  // Chart options
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Job Views by Category",
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          stepSize: 50, // Step size for Y-axis
-        },
-      },
-    },
-  };
+      setChartData({
+        labels,
+        datasets: [
+          {
+            label: "Views by Department",
+            data,
+            backgroundColor: "#36A2EB",
+            borderColor: "#2b6cb0",
+            borderWidth: 1,
+            barThickness: 60,
+          },
+        ],
+      });
+    }
+  }, [departmentViews]);
 
   return (
-    <div style={{ width: "500px", margin: "0 auto" }}>
-      <h2 className="job-view-header">Job Category Views</h2>
-      {chartData ? (
-        <Bar data={chartData} options={options} />
-      ) : (
-        <p>Loading...</p>
-      )}
+    <div style={{ width: "600px" }}>
+      <h2 className="job-view-header">Job Views by Department</h2>
+      {chartData ? <Bar data={chartData} /> : <p>Loading...</p>}
     </div>
   );
 };

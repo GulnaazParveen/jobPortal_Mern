@@ -16,8 +16,8 @@ const JobViewsBarChart = ({ departmentViews }) => {
 
   useEffect(() => {
     if (departmentViews.length > 0) {
-      const labels = departmentViews.map((d) => d.department || "Unknown");
-      const data = departmentViews.map((d) => d.count || 0);
+      const labels = departmentViews.map((d) => d._id || "Unknown");
+      const data = departmentViews.map((d) => d.totalViews || 0);
 
       setChartData({
         labels,
@@ -25,7 +25,7 @@ const JobViewsBarChart = ({ departmentViews }) => {
           {
             label: "Views by Department",
             data,
-            backgroundColor: "#36A2EB",
+            backgroundColor: ["#36A2EB", "#FF6384", "#FFCE56", "#4BC0C0"],
             borderColor: "#2b6cb0",
             borderWidth: 1,
             barThickness: 60,

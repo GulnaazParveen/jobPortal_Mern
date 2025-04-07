@@ -52,8 +52,9 @@ const [departmentViews, setDepartmentViews] = useState([]);
 
         // Convert applicant trend data for line chart
        const formattedTrends = applicantTrend.map((item) => ({
-         name: item.date, // ✅ now it will show dates like "2025-04-01"
+         date: item.date, // ✅ now it will show dates like "2025-04-01"
          count: item.count,
+         source:item.source
        }));
 
 

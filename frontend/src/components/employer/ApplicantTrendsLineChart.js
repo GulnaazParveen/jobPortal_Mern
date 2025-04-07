@@ -23,28 +23,37 @@ ChartJS.register(
 const ApplicantTrendsLineChart = ({ applicantTrend, source }) => {
   const [chartData, setChartData] = useState(null);
 
-  useEffect(() => {
-    if (!applicantTrend || applicantTrend.length === 0) return;
+ useEffect(() => {
+   if (!applicantTrend || applicantTrend.length === 0) return;
 
-   const labels = applicantTrend.map((item) => item.name); 
+   // Get unique dates
+   const labels = [...new Set(applicantTrend.map((item) => item.date))];
 
-   const dataValues = applicantTrend.map((item) => item.count);
+   // Get unique sources
+   const sources = [...new Set(applicantTrend.map((item) => item.source))];
 
-    setChartData({
-      labels,
-      datasets: [
-        {
-          label: "Applicants per Week",
-          data: dataValues,
-          backgroundColor: "#658ffd",
-          borderColor: "#658ffd",
-          borderWidth: 2,
-          fill: false,
-          tension: 0.4,
-        },
-      ],
-    });
-  }, [applicantTrend]);
+   // Create datasets for each source
+   const datasets = sources.map((source, idx) => {
+     const colorList = ["#658ffd", "#ff6384", "#4bc0c0", "#ffce56", "#9966ff"];
+     const data = labels.map((label) => {
+       const entry = applicantTrend.find(
+         (item) => item.date === label && item.source === source
+       );
+       return entry ? entry.count : 0;
+     });
+
+     return {
+       label: source,
+       data,
+       fill: false,
+       tension: 0.4,
+       borderColor: colorList[idx % colorList.length],
+       backgroundColor: colorList[idx % colorList.length],
+     };
+   });
+
+   setChartData({ labels, datasets });
+ }, [applicantTrend]);
 
   const options = {
     responsive: true,

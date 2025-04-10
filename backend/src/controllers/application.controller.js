@@ -4,50 +4,44 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import applicantion from "../models/application.model.js";
 import job from "../models/createJob.js";
 import mongoose from "mongoose";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 const userApplication=asyncHandler(async(req,res)=>{
-    const jobFound = await job.findOne();
-    if (!jobFound) {
-      throw new ApiError(400, "No job found");
-    }
+  const { jobId, userId, coverLetter, linkedin, source } = req.body;
 
-    const dummyApps = [
-      {
-        jobId: jobFound._id,
-        userId: new mongoose.Types.ObjectId(),
-        source: "SocialMedia",
-      },
-      {
-        jobId: jobFound._id,
-        userId: new mongoose.Types.ObjectId(),
-        source: "JobBoards",
-      },
-      {
-        jobId: jobFound._id,
-        userId: new mongoose.Types.ObjectId(),
-        source: "Referral",
-      },
-      {
-        jobId: jobFound._id,
-        userId: new mongoose.Types.ObjectId(),
-        source: "Email",
-      },
-      {
-        jobId: jobFound._id,
-        userId: new mongoose.Types.ObjectId(),
-        source: "CompanyWebsite",
-      },
-    ];
+  const resumeFile = req.files?.resume?.[0]; // ✅ get 'resume', not 'avatar'
+  console.log("Files:", req.files);
 
-    await applicantion.insertMany(dummyApps);
+  if (!jobId || !userId || !resumeFile) {
+    throw new ApiError(400, "Job ID, User ID, and Resume file are required");
+  }
 
-    return res
-      .status(201)
-      .json(
-        new ApiResponse(
-          201,
-          dummyApps,
-          "Dummy applications inserted successfully"
-        )
-      );
-})
+  const resumePath = resumeFile.path;
+  if (!resumePath) {
+    throw new ApiError(400, "Invalid resume file");
+  }
+
+  const resumeUpload = await uploadOnCloudinary(resumePath);
+  if (!resumeUpload || !resumeUpload.secure_url) {
+    throw new ApiError(400, "Failed to upload resume");
+  }
+
+  const resumeUrl = resumeUpload.secure_url;
+
+  const application = await applicantion.create({
+    jobId,
+    userId,
+    resume: resumeUrl,
+    coverLetter,
+    linkedin,
+    source: source || "CompanyWebsite",
+  });
+
+  return res
+    .status(201)
+    .json(
+      new ApiResponse(201, application, "Application submitted successfully")
+    );
+});
+
+
 export { userApplication };

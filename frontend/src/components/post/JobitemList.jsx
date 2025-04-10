@@ -35,7 +35,7 @@ const JobitemList = ({ job }) => {
         </div>
       </div>
       <div className="applicant-Item">
-        <span>Engineering</span>
+        <span>{job.department}</span>
       </div>
       <div className="created">
         <p>{formatDate(job.createdAt)}</p>

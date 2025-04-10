@@ -22,5 +22,13 @@ router.route("/registerUser").post(
 
 router.route("/login").post(loginUser);
 router.route("/logout").post(verifyJWT,logoutUser)
-router.route("/applications").post(userApplication);
+router.route("/applications").post(
+  upload.fields([
+    {
+      name: "resume",
+      maxCount: 1,
+    },
+  ]),
+  userApplication
+);
 export default router;

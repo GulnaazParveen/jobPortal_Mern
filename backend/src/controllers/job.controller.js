@@ -4,6 +4,7 @@ import employerModel from "../models/employerRegister.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import mongoose from "mongoose";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 const createJob = asyncHandler(async (req, res) => {
   const {
     employerId,
@@ -158,7 +159,7 @@ const getViewsByDepartment = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, views, "Views by department fetched"));
 });
-
+// apply for job
 
 export {
   createJob,

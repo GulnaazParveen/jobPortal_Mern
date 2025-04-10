@@ -16,6 +16,16 @@ const applicantionSchema = new mongoose.Schema(
       enum: ["CompanyWebsite", "Referral", "SocialMedia", "Email", "JobBoards"],
       default: "CompanyWebsite",
     },
+    resume: {
+      type: String,
+      required: true,
+    },
+    coverLetter: {
+      type: String,
+    },  
+    linkedin: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

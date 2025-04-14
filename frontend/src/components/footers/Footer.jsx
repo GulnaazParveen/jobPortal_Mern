@@ -22,11 +22,6 @@ const Footer = () => {
           <div className="cta-container">
             <div className="email">finloan@support.com</div>
             <div className="mobileno">+10 873 672 6782 </div>
-            <div className="location">
-              <span>600/D,</span>
-              <span>Green road</span>
-              <span>NewYork</span>
-            </div>
           </div>
           <div className="follow-container">
             <div className="icons">

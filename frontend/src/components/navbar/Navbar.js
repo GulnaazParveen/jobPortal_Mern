@@ -196,10 +196,6 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/blogs"
-                style={({ isActive }) => {
-                  return { color: isActive ? "#00D363" : "" };
-                }}
                 className="link"
               >
                 Blog
@@ -207,10 +203,6 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/contact"
-                style={({ isActive }) => {
-                  return { color: isActive ? "#00D363" : "" };
-                }}
                 className="link"
               >
                 Contact

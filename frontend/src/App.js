@@ -21,9 +21,13 @@ function App() {
 
  useEffect(() => {
    const storedEmployer = localStorage.getItem("employer");
+   
    if (storedEmployer) {
+     console.log("Stored Employer new:", storedEmployer);
      setEmployer(JSON.parse(storedEmployer));
    }   
+   console.log("Employer from localStorage:", employer);
+   
    setLoading(false); // Set loading to false once data is fetched
  }, []);
  

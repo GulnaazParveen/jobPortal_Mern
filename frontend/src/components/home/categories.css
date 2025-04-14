@@ -108,8 +108,8 @@ color: var(--color-white);
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 16rem;
-        left: 9rem;
+    top: 14rem;
+        left: 3rem;
 }
 .category-item{
     background-color: var(--color-white);

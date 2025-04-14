@@ -5,6 +5,7 @@ import Sidebar from "../sidebar/Sidebar";
 import Joblistining from "../joblistning/Joblistining";
 import BrowseSearch from "./BrowseSearch";
 import axios from "axios";
+import Rightbar from "./Rightbar";
 
 const Browsejob = () => {
   const [jobs, setJobs] = useState([]);
@@ -89,7 +90,9 @@ const Browsejob = () => {
             <Joblistining jobs={filteredJobs} />
           )}
         </div>
-        <div>right</div>
+        <div>
+          <Rightbar/>
+        </div>
       </div>
     </div>
   );

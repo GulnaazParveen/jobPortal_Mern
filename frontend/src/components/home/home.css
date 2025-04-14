@@ -55,5 +55,7 @@
 .textstyle{
     font-size: 2rem;
     font-weight: 700;
+    width: 500px;
+    margin-top: 0;
     color: var(--color-white);
 }

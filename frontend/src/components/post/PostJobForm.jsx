@@ -14,17 +14,15 @@ const PostJobForm = () => {
   const [formData, setFormData] = useState({
     employerId: employerId,
     name: "",
-    email: "",
-    password: "",
-    websiteurl: "",
     phone: "",
     companyName: "",
     companyLogo: "",
     jobTitle: "",
-    department:"Engineering",
+    department: "Engineering",
     employmentType: "Full-time",
     experienceLevel: "Entry Level",
     location: "",
+    websiteurl: "",
     jobDescription: "",
   });
   
@@ -92,8 +90,6 @@ const PostJobForm = () => {
             onChange={handleChange}
             className="input"
           />
-        </div>
-        <div className="grid">
           <input
             type="text"
             name="phone"
@@ -102,6 +98,8 @@ const PostJobForm = () => {
             onChange={handleChange}
             className="input"
           />
+        </div>
+        <div className="grid">
           <input
             type="text"
             name="companyName"
@@ -110,8 +108,6 @@ const PostJobForm = () => {
             onChange={handleChange}
             className="input"
           />
-        </div>
-        <div className="grid">
           <input
             type="text"
             name="companyLogo"
@@ -120,27 +116,32 @@ const PostJobForm = () => {
             onChange={handleChange}
             className="input"
           />
+        </div>
+        <div className="grid">
           <input
             type="text"
             name="jobTitle"
             placeholder="Job Title"
             value={formData.jobTitle}
             onChange={handleChange}
-            className="input"
+            className="input handleInput"
           />
-          <select
-            name=" department"
-            value={formData.department}
+          <input
+            type="text"
+            name="location"
+            placeholder="Location"
+            value={formData.location}
             onChange={handleChange}
-            className="select"
-          >
-            <option value="Full-time">Engineering</option>
-            <option value="Part-time">Marketing</option>
-            <option value="Temporary">Design</option>
-            <option value="Contract">Product Management</option>
-            <option value="Full-time">HR</option>
-            <option value="Full-time">Sales</option>
-          </select>
+            className="input handleInput"
+          />
+          <input
+            type="text"
+            name="websiteurl"
+            placeholder=" websiteurl"
+            value={formData.websiteurl}
+            onChange={handleChange}
+            className="input handleInput"
+          />
         </div>
         <div className="grid">
           <select
@@ -165,14 +166,19 @@ const PostJobForm = () => {
             <option value="Senior Level">Senior Level</option>
             <option value="Internship">Internship</option>
           </select>
-          <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={formData.location}
+          <select
+            name="department"
+            value={formData.department}
             onChange={handleChange}
-            className="input"
-          />
+            className="select"
+          >
+            <option value="Engineering">Engineering</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Design">Design</option>
+            <option value="Product Management">Product Management</option>
+            <option value="HR">HR</option>
+            <option value="Sales">Sales</option>
+          </select>
         </div>
         <div>
           <h3>Job Description</h3>

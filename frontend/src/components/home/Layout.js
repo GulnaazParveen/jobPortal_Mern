@@ -45,9 +45,11 @@ const Layout = () => {
   const isManageJobRoute = matchManageJob || matchEmployerChat;
   const isManageChat = matchUserChat !== null;
 
-  const isDynamicTextBasedOnRoutes = dynamicTextBasedOnRoutes.includes(
-    location.pathname
-  );
+ const isDynamicTextBasedOnRoutes =
+   dynamicTextBasedOnRoutes.includes(location.pathname) ||
+   isManageJobRoute ||
+   isManageChat;
+
 
   // Define user-related routes explicitly
   const isUserRelatedRoute = isManageJobRoute || isManageChat;
@@ -68,17 +70,22 @@ const Layout = () => {
   const dynamicTextDisplay = {
     browseJob: "4536+ Jobs Available",
     postjobform: "Enter post job details",
-    managejob: "Manage jobs",
-    chat: "all the best", // If you want a general manage jobs text
+    managejob: "Track and Manage Jobs",
+    chat: "all the best",
     blogs: "Blogs",
     contact: "Contact",
     default: "",
   };
 
   // Get the dynamic text based on the current route
-  const dynamicText =
-    dynamicTextDisplay[location.pathname.slice(1)] ||
-    dynamicTextDisplay.default;
+ const dynamicText =
+   dynamicTextDisplay[location.pathname.slice(1)] ||
+   (matchManageJob
+     ? dynamicTextDisplay.managejob
+     : matchEmployerChat || matchUserChat
+     ? dynamicTextDisplay.chat
+     : dynamicTextDisplay.default);
+
 
   return (
     <section className="homepage">

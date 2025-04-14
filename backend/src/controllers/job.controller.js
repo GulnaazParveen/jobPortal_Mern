@@ -5,6 +5,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import mongoose from "mongoose";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+
 const createJob = asyncHandler(async (req, res) => {
   const {
     employerId,
@@ -17,6 +18,7 @@ const createJob = asyncHandler(async (req, res) => {
     experienceLevel,
     jobTitle,
     location,
+    department,
     jobDescription,
   } = req.body;
 
@@ -30,6 +32,7 @@ const createJob = asyncHandler(async (req, res) => {
       companyLogo,
       jobTitle,
       location,
+      department,
       jobDescription,
     ].some((field) => field?.trim() === "")
   ) {
@@ -44,7 +47,7 @@ const createJob = asyncHandler(async (req, res) => {
   const employerObjectId = new mongoose.Types.ObjectId(employerId); 
 
   const jobDoc = await job.create({
-    employer: employerObjectId, // Use ObjectId here
+    employer: employerObjectId,
     name,
     websiteurl,
     phone,
@@ -54,6 +57,8 @@ const createJob = asyncHandler(async (req, res) => {
     experienceLevel,
     jobTitle,
     location,
+    department,
+    jobViews: 0,
     jobDescription,
   });
   await jobDoc.save();
